@@ -111,9 +111,11 @@ private
   def parse_gem_list(stdout, plat = platform)
     h = {}
     stdout.split("\n").each do |line|
-      name, version = s.match(/^([\w\-_]+) \((.*)\)$/)[1,2] rescue next
       h[name] ||= { }
-      h[name][plat] = [h[name][plat], version].compact.join(', ')
+      name, versions = line.match(/^([\w\-_]+) \((.*)\)$/)[1,2] rescue next
+      versions = versions.split(",").map { |version| version.strip.split.first }
+      std_hash[name] ||= { }
+      std_hash[name][:windows] = [std_hash[name][:windows], versions].compact.join(',')
     end
     h
   end
