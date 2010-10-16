@@ -18,5 +18,5 @@ PLATFORMS = {
 }
 
 PLATFORMS.each do |code, name|
-  Platform.create(:code => code, :name => name)
+  Platform.create(:code => code, :name => name) unless Platform.find_by_code(code)
 end
