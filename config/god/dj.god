@@ -2,10 +2,12 @@ rails_root = "/srv/gemrage/current"
 
 2.times do |num|
   God.watch do |w|
-    w.name     = "dj-#{num}"
-    w.group    = 'dj'
+    w.name = "dj-#{num}"
+    w.group = 'dj'
     w.interval = 30.seconds
-    w.start    = "RAILS_ENV=production rake -f #{rails_root}/Rakefile jobs:work"
+    w.pid_file = File.join(rails_root, 'tmp', 'pids', "delayed_job.#{num}.pid")
+    w.start = "RAILS_ENV=production #{rails_root}/script/delayed_job start -i #{num}"
+    w.stop = "RAILS_ENV=production #{rails_root}/script/delayed_job stop -i #{num}"
 
     w.uid = 'rails'
     w.gid = 'rails'
