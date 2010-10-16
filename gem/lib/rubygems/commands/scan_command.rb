@@ -1,4 +1,5 @@
 require 'rubygems/gemcutter_utilities'
+require 'rbconfig'
 
 # Holy shit disgusting
 Gem.clear_paths
@@ -46,6 +47,7 @@ private
   end
 
   def pik_scan
+    parse_gem_list(`pik gem list`)
   end
 
   def rvm_scan
@@ -64,9 +66,11 @@ private
   end
 
   def windows?
+    Config::CONFIG['host_os'] =~ /mswin|mingw/
   end
 
   def pik?
+    `pik` rescue false
   end
 
   def rvm?
@@ -74,5 +78,6 @@ private
   end
 
   def parse_gem_list(stdout)
+    
   end
 end
