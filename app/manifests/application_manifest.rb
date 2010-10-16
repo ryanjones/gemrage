@@ -29,7 +29,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     # package 'some_native_package', :ensure => :installed
     package 'libxml2', :ensure => :installed
     package 'libxml2-dev', :ensure => :installed
-    package 'libxslt1-dev', :ensure => :installed
+    package 'libxslt-dev', :ensure => :installed
 
     # some_rake_task = "/usr/bin/rake -f #{configuration[:deploy_to]}/current/Rakefile custom:task RAILS_ENV=#{ENV['RAILS_ENV']}"
     # cron 'custom:task', :command => some_rake_task, :user => configuration[:user], :minute => 0, :hour => 0
