@@ -33,6 +33,9 @@ gem 'omniauth'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :test, :development do
+  # local web server to handle long OpenID return URLs
+  gem 'mongrel', '1.2.0.pre2'
+
 	gem 'rspec'
 	gem "rspec-rails"
 	gem 'webrat'
