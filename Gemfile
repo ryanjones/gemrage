@@ -5,7 +5,9 @@ gem 'rails', '3.0.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+# windows fix
+gem 'mysql', :platforms => :mswin
+gem 'mysql2', :platforms => :ruby
 
 # Use unicorn as the web server
 # gem 'unicorn'
