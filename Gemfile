@@ -11,7 +11,8 @@ gem 'capistrano'
 gem 'shadow_puppet'
 
 # authentication
-gem 'devise', '1.1.3'
+gem 'devise'
+gem 'omniauth'
 
 # Use unicorn as the web server
 # gem 'unicorn'
