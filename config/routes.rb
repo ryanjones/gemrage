@@ -1,4 +1,6 @@
 Gemrage::Application.routes.draw do
+  get "pages/home"
+
   # catching twitter/openid/facebook callbacks (omniauth)
   match '/auth/:provider/callback' => 'authentications#create',
     :as => 'auth_callback'
