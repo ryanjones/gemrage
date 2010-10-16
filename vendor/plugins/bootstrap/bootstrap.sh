@@ -11,6 +11,8 @@ if ! grep -q "^${user}:" /etc/passwd >/dev/null ; then
     --gid ${user} --uid 2020 --system --shell /bin/bash ${user}
 fi
 
+chown -R ${user}:${user} /home/${user}
+
 if ! grep -q "^sudo:.*${user}" /etc/group >/dev/null ; then
   if grep -q "^sudo:.*:$" /etc/group >/dev/null ; then
     perl -pi -e "s|^(sudo:.*):$|\$1:${user}|" /etc/group
