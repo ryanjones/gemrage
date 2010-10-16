@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -o errtrace
+set -o errexit
+
+export PS4='+[${BASH_SOURCE}] : ${LINENO} : ${FUNCNAME[0]:+${FUNCNAME[0]}() $ }'
+
+if [[ ${rvm_ignore_rvmrc:-0} -eq 0 ]]; then
+  for file in /etc/rvmrc "$HOME/.rvmrc" ; do
+    if [[ -s "$file" ]] ; then
+      source $file
+    fi
+  done
+fi
+
+rvm_path="${rvm_path:-"$HOME/.rvm"}"
+
+mkdir -p "$rvm_path/src/"
+
+builtin cd "$rvm_path/src"
+
+rm -rf ./rvm/
+
+url="http://github.com/wayneeseguin/rvm.git"
+
+if ! git clone "$url" ; then
+  printf "ERROR: Cloning from $url failed.\n"
+  exit 1
+fi
+
+builtin cd rvm
+
+chmod +x "$PWD/scripts/install"
+
+exec "$PWD/scripts/install"
