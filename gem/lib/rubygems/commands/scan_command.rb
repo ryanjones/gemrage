@@ -85,8 +85,7 @@ private
     std_split.each do |s|
     name, version = s.match(/^([\w\-_]+) \((.*)\)$/)[1,2] rescue next
     std_hash[name] ||= { }
-    std_hash[name][:windows] = [std_hash[name][:windows], version].compact.join(', ')
-end 
+    std_hash[name][platform] = [std_hash[name][platform], version].compact.join(', ')
   end
 
   def rvm_platform
