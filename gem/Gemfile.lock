@@ -33,6 +33,6 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.0.3)
   jeweler
-  macaddr
+  macaddr (~> 1.0.0)
   rest-client (~> 1.6.1)
   rspec (~> 2.0.0)
