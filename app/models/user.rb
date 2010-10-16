@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
+  
+  has_many :machines
+  has_many :installed_gems
 
   def apply_omniauth(omniauth)
     self.email = omniauth['user_info']['email'] if email.blank?
@@ -19,4 +22,5 @@ class User < ActiveRecord::Base
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end
+
 end
