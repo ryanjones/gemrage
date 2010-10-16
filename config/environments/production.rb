@@ -48,5 +48,5 @@ Gemrage::Application.configure do
   config.active_support.deprecation = :notify
 
   # for devise
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'gemrage.com' }
 end
