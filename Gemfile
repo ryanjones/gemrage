@@ -9,7 +9,7 @@ gem 'mysql'
 gem 'devise'
 gem 'omniauth'
 gem 'daemons', :git => 'git://github.com/ghazel/daemons.git' # This is a better daemons gem
-gem 'delayed_job', '~> 2.1.0.pre'
+gem 'delayed_job', '~> 2.1.0.pre2', :git => 'git://github.com/collectiveidea/delayed_job.git'
 
 group :production do
   # moonshine puppety goodness
