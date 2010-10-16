@@ -5,11 +5,13 @@ gem 'rails', '3.0.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-# windows fix
 gem 'mysql'
 
 gem 'capistrano'
 gem 'shadow_puppet'
+
+# authentication
+gem 'devise', '1.1.3'
 
 # Use unicorn as the web server
 # gem 'unicorn'
