@@ -54,17 +54,21 @@ private
   def rvm_scan
     RVM.list_gemsets.map do |config|
       RVM.use(config)
-      platform = rvm_platform
-      parse_gem_list(RVM.perform_set_operation(:gem, 'list').stdout)
+      parse_gem_list(RVM.perform_set_operation(:gem, 'list').stdout, rvm_platform)
+      # Do some other magic
     end
   ensure
     RVM.reset_current!
   end
 
   def basic_scan
+    plat = platform
+    h = {}
     Gem.source_index.map do |name, spec|
-      spec.name
+      h[spec.name] ||= {}
+      h[spec.name][plat] = [spec.version.to_s, h[spec.name][plat]].compact.join(', ')
     end
+    h
   end
 
   def pik?
@@ -80,12 +84,14 @@ private
   end
 
   def parse_gem_list(stdout)
-    stdout_split = stdout.split("\n")
-    std_hash = Hash.new
-    std_split.each do |s|
-    name, version = s.match(/^([\w\-_]+) \((.*)\)$/)[1,2] rescue next
-    std_hash[name] ||= { }
-    std_hash[name][platform] = [std_hash[name][platform], version].compact.join(', ')
+    plat = platform
+    h = {}
+    stdout.split("\n").each do |line|
+      name, version = s.match(/^([\w\-_]+) \((.*)\)$/)[1,2] rescue next
+      h[name] ||= { }
+      h[name][plat] = [h[name][plat], version].compact.join(', ')
+    end
+    h
   end
 
   def rvm_platform
