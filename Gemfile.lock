@@ -58,6 +58,7 @@ GEM
     net-ssh-gateway (1.0.1)
       net-ssh (>= 1.99.1)
     nokogiri (1.4.3.1)
+    nokogiri (1.4.3.1-x86-mingw32)
     polyglot (0.3.1)
     puppet (0.24.8)
       facter (>= 1.1.0)
@@ -109,10 +110,12 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   autotest
   capistrano
+  mysql
   mysql2
   rails (= 3.0.1)
   rspec
