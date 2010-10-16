@@ -9,6 +9,7 @@ GEM
       git (>= 1.2.5)
       rubyforge (>= 2.0.0)
     json_pure (1.4.6)
+    macaddr (1.0.0)
     mime-types (1.16)
     rest-client (1.6.1)
       mime-types (>= 1.16)
@@ -24,12 +25,16 @@ GEM
       rspec-expectations (= 2.0.0)
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)
+    rvm (1.0.14)
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   bundler (~> 1.0.3)
   jeweler
+  macaddr (~> 1.0.0)
   rest-client (~> 1.6.1)
   rspec (~> 2.0.0)
+  rvm (~> 1.0.14)
