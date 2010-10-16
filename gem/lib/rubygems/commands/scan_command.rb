@@ -1,5 +1,6 @@
 require 'rubygems/gemcutter_utilities'
 require 'rbconfig'
+require 'digest/SHA1'
 
 # Holy shit disgusting
 Gem.clear_paths
@@ -75,6 +76,10 @@ private
 
   def rvm?
     !RVM.path.nil?
+  end
+  
+  def mac_hash
+    Digest::SHA1.hexdigest(Mac.addr)
   end
 
   def parse_gem_list(stdout)
