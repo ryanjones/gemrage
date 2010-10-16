@@ -7,3 +7,4 @@ tmp/**/*
 config/database.yml
 bin/*
 vendor/plugins/bootstrap/id_dsa*
+vendor/plugins/bootstrap/keys
