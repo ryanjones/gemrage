@@ -9,7 +9,7 @@ describe Rubygem do
   
   it "should not be valid if name is nil" do
      subject.name = nil
-     should_not be_valid
+     subject.should_not be_valid
   end
 end
 
