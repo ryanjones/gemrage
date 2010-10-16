@@ -15,6 +15,8 @@ Bundler.require
 class Gem::Commands::ScanCommand < Gem::Command
   include Gem::GemcutterUtilities
 
+  GemrageHost = 'http://gemrage.com/'
+
   def initialize
     super('scan', description, :dir => '')
   end
@@ -32,17 +34,20 @@ class Gem::Commands::ScanCommand < Gem::Command
   end
 
   def execute
-    p platform
+    p system_scan
   end
 
 private
 
   def system_scan
     if windows? && pik?
+      notify("Scanning with pik")
       pik_scan
     elsif !windows? && rvm?
+      notify("Scanning with RVM...this might take a while")
       rvm_scan
     else
+      notify("Scanning with basic gem support")
       basic_scan
     end
   end
@@ -52,19 +57,43 @@ private
   end
 
   def rvm_scan
+    h = {}
     RVM.list_gemsets.map do |config|
+      notify("Scanning RVM config ", config)
       RVM.use(config)
-      platform = rvm_platform
-      parse_gem_list(RVM.perform_set_operation(:gem, 'list').stdout)
+      h = merge_gem_list(h, parse_gem_list(RVM.perform_set_operation(:gem, 'list').stdout, rvm_platform))
     end
+    h
+  rescue => boom
+    notify("There was an error scanning: ", boom.message)
+    notify("On line: ", boom.backtrace.first)
+    notify("Please report this at http://gemrage.com/ so we can fix it!")
+    {}
   ensure
     RVM.reset_current!
   end
 
-  def basic_scan
-    Gem.source_index.map do |name, spec|
-      spec.name
+  def merge_gem_list(*hashes)
+    h = {}
+    hashes.each do |hash|
+      hash.each do |name, platform_hash|
+        h[name] ||= {}
+        platform_hash.each do |platform, versions|
+          h[name][platform] = [h[name][platform], versions].join(', ')
+        end
+      end
     end
+    h
+  end
+
+  def basic_scan
+    plat = platform
+    h = {}
+    Gem.source_index.map do |name, spec|
+      h[spec.name] ||= {}
+      h[spec.name][plat] = [spec.version.to_s, h[spec.name][plat]].compact.join(', ')
+    end
+    h
   end
 
   def pik?
@@ -79,8 +108,14 @@ private
     Digest::SHA1.hexdigest(Mac.addr)
   end
 
-  def parse_gem_list(stdout)
-
+  def parse_gem_list(stdout, plat = platform)
+    h = {}
+    stdout.split("\n").each do |line|
+      name, version = s.match(/^([\w\-_]+) \((.*)\)$/)[1,2] rescue next
+      h[name] ||= { }
+      h[name][plat] = [h[name][plat], version].compact.join(', ')
+    end
+    h
   end
 
   def rvm_platform
@@ -120,5 +155,10 @@ private
     else
       :unknown
     end
+  end
+
+  def notify(*messages)
+    print(*messages)
+    print("\n")
   end
 end
