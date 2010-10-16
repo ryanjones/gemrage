@@ -22,6 +22,6 @@ ActiveRecord::Schema.define(:version => 20101016033438) do
     t.boolean  "queue",          :default => false, :null => false
   end
 
-  add_index "rubygems", ["name"], :name => "index_rubygems_on_name", :unique => true
+  add_index "rubygems", ["name"], :name => "index_rubygems_on_name"
 
 end
