@@ -6,8 +6,7 @@ gem 'rails', '3.0.1'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # windows fix
-gem 'mysql', :platforms => :mswin
-gem 'mysql2', :platforms => :ruby
+gem 'mysql'
 
 gem 'capistrano'
 gem 'shadow_puppet'
