@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'rake'
-# require File.join(File.dirname(__FILE__), 'vendor', 'ruby', '1.8', 'gems', 'bundler-1.0.3', 'lib', 'bundler', 'setup')
-# Bundler.require
+require File.join(File.dirname(__FILE__), 'vendor', 'ruby', '1.8', 'gems', 'bundler-1.0.3', 'lib', 'bundler', 'setup')
+Bundler.require
 
 begin
   require 'jeweler'
@@ -12,6 +12,7 @@ begin
     gem.email = 'darkhelmet@darkhelmetlive.com'
     gem.homepage = 'http://gemrage.com'
     gem.authors = ['Daniel Huckstep']
+    gem.test_files = []
     #
     # We want NO DEPENDENCIES IN HERE!!!!!
     # We use bundler for stuff and then vendor it
