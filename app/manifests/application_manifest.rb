@@ -58,7 +58,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
 
   # http://github.com/railsmachine/moonshine_god
   configure(:god => {
-    :log_level => 'debug',
+    :log_level => 'info',
     :log_file => "#{configuration[:deploy_to]}/shared/log/god.log"
   })
   plugin :god
