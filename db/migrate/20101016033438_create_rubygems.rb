@@ -12,7 +12,7 @@ class CreateRubygems < ActiveRecord::Migration
       t.boolean :queue, :null => false, :default => false 
     end
     
-    add_index :rubygems, :name, :unique => true
+    add_index :rubygems, :name, :unique => false
   end
 
   def self.down
