@@ -1,6 +1,6 @@
 require 'rubygems/gemcutter_utilities'
 require 'rbconfig'
-require 'digest/SHA1'
+require 'digest/sha1'
 
 # Holy shit disgusting
 Gem.clear_paths
@@ -32,7 +32,7 @@ class Gem::Commands::ScanCommand < Gem::Command
   end
 
   def execute
-    p basic_scan.join(', ')
+    p platform
   end
 
 private
@@ -54,20 +54,21 @@ private
   def rvm_scan
     RVM.list_gemsets.map do |config|
       RVM.use(config)
-      parse_gem_list(RVM.perform_set_operation(:gem, 'list').stdout)
+      parse_gem_list(RVM.perform_set_operation(:gem, 'list').stdout, rvm_platform)
+      # Do some other magic
     end
   ensure
     RVM.reset_current!
   end
 
   def basic_scan
+    plat = platform
+    h = {}
     Gem.source_index.map do |name, spec|
-      spec.name
+      h[spec.name] ||= {}
+      h[spec.name][plat] = [spec.version.to_s, h[spec.name][plat]].compact.join(', ')
     end
-  end
-
-  def windows?
-    Config::CONFIG['host_os'] =~ /mswin|mingw/
+    h
   end
 
   def pik?
@@ -77,12 +78,58 @@ private
   def rvm?
     !RVM.path.nil?
   end
-  
+
   def mac_hash
     Digest::SHA1.hexdigest(Mac.addr)
   end
 
   def parse_gem_list(stdout)
-    
+    plat = platform
+    h = {}
+    stdout.split("\n").each do |line|
+      name, version = s.match(/^([\w\-_]+) \((.*)\)$/)[1,2] rescue next
+      h[name] ||= { }
+      h[name][plat] = [h[name][plat], version].compact.join(', ')
+    end
+    h
+  end
+
+  def rvm_platform
+    engine = RVM.ruby('print RUBY_ENGINE').stdout and engine = engine.empty? ? nil : engine
+    description = RVM.ruby('print RUBY_DESCRIPTION').stdout and description = description.empty? ? nil : description
+    version = RVM.ruby('print RUBY_VERSION').stdout and version = version.empty? ? nil : version
+    platform(engine, description, version)
+  end
+
+  def windows?
+    Config::CONFIG['host_os'] =~ /mswin|mingw/
+  end
+
+  def platform(engine = (defined?(RUBY_ENGINE) ? RUBY_ENGINE : nil),
+         description = (defined?(RUBY_DESCRIPTION) ? RUBY_DESCRIPTION : nil),
+         version = (defined?(RUBY_VERSION) ? RUBY_VERSION : nil))
+    if engine && engine == 'jruby'
+      :jruby
+    elsif engine && engine == 'ironruby'
+      :ironruby
+    elsif windows?
+      :windows
+    elsif engine && engine == 'rbx'
+      :rubinius
+    elsif description && description =~ /Ruby Enterprise Edition/
+      :ree
+    elsif engine && engine == 'macruby'
+      :macruby
+    elsif engine && engine == 'maglev'
+      :maglev
+    elsif version && version == '1.8.6'
+      :mri_186
+    elsif version && version == '1.8.7'
+      :mri_187
+    elsif version && version =~ /^1\.9/
+      :mri_19
+    else
+      :unknown
+    end
   end
 end
