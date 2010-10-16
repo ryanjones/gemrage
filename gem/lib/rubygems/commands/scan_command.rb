@@ -16,9 +16,10 @@ class Gem::Commands::ScanCommand < Gem::Command
   include Gem::GemcutterUtilities
 
   GemrageHost = 'http://gemrage.com/'
+  # GemrageHost = 'http://localhost:3000/'
 
   def initialize
-    super('scan', description, :dir => '')
+    super('scan', description)
   end
 
   def description
@@ -34,10 +35,17 @@ class Gem::Commands::ScanCommand < Gem::Command
   end
 
   def execute
-    p system_scan
+    notify(send_system_to_gemrage(basic_scan))
   end
 
 private
+
+  def send_system_to_gemrage(gems)
+    RestClient.post(URI.join(GemrageHost, '/api/v1/payload/system.json').to_s, :payload => { :header => { :machine_id => mac_hash }, :installed_gems => gems })
+  end
+
+  def send_project_to_gemrage(payload)
+  end
 
   def system_scan
     if windows? && pik?
@@ -59,15 +67,44 @@ private
   def rvm_scan
     h = {}
     RVM.list_gemsets.map do |config|
-      notify("Scanning RVM config ", config)
-      RVM.use(config)
-      h = merge_gem_list(h, parse_gem_list(RVM.perform_set_operation(:gem, 'list').stdout, rvm_platform))
+      notify('Scanning RVM config ', config)
+      begin
+        rd, wr = IO.pipe
+        pid = fork do
+          begin
+            # Clear this because shenanigans ensue
+            ENV['BUNDLE_GEMFILE'] = nil
+            RVM.use(config)
+            wr.write("#{rvm_platform}\n")
+            # Have to do it this way to get stdout instead of just the okay from RVM
+            wr.write(RVM.perform_set_operation(:gem, 'list').stdout)
+          ensure
+            # No, mister superman no here...
+            RVM.reset_current!
+            # Ensure we close these inside the fork
+            rd.close unless rd.closed?
+            wr.close unless wr.closed?
+          end
+        end
+        # Close the write pipe so eof works and we don't hang
+        wr.close unless wr.closed?
+        Process.waitpid(pid)
+        plat = rd.readline.chomp.to_sym
+        h = merge_gem_list(h, parse_gem_list(rd.read, plat))
+      rescue => boom
+        # Don't care right now
+        # Might be an IO problem or whatever, just skip it
+      ensure
+        # Ensure we close these outside the fork
+        rd.close unless rd.closed?
+        wr.close unless wr.closed?
+      end
     end
     h
   rescue => boom
-    notify("There was an error scanning: ", boom.message)
-    notify("On line: ", boom.backtrace.first)
-    notify("Please report this at http://gemrage.com/ so we can fix it!")
+    notify('There was an error scanning: ', boom.message)
+    notify('On line: ', boom.backtrace.first)
+    notify('Please report this at http://gemrage.com/ so we can fix it!')
     {}
   ensure
     RVM.reset_current!
@@ -79,7 +116,7 @@ private
       hash.each do |name, platform_hash|
         h[name] ||= {}
         platform_hash.each do |platform, versions|
-          h[name][platform] = [h[name][platform], versions].join(', ')
+          h[name][platform] = [h[name][platform], versions].compact.uniq.join(',')
         end
       end
     end
@@ -91,7 +128,7 @@ private
     h = {}
     Gem.source_index.map do |name, spec|
       h[spec.name] ||= {}
-      h[spec.name][plat] = [spec.version.to_s, h[spec.name][plat]].compact.join(', ')
+      h[spec.name][plat] = [spec.version.to_s, h[spec.name][plat]].compact.uniq.join(',')
     end
     h
   end
@@ -111,18 +148,20 @@ private
   def parse_gem_list(stdout, plat = platform)
     h = {}
     stdout.split("\n").each do |line|
-      name, version = s.match(/^([\w\-_]+) \((.*)\)$/)[1,2] rescue next
-      h[name] ||= { }
-      h[name][plat] = [h[name][plat], version].compact.join(', ')
+      name, versions = line.match(/^([\w\-_]+) \((.*)\)$/)[1,2] rescue next
+      versions = versions.split(',').map { |version| version.strip.split.first }
+      h[name] ||= {}
+      h[name][plat] = [h[name][plat], versions].compact.uniq.join(',')
     end
     h
   end
 
   def rvm_platform
-    engine = RVM.ruby('print RUBY_ENGINE').stdout and engine = engine.empty? ? nil : engine
-    description = RVM.ruby('print RUBY_DESCRIPTION').stdout and description = description.empty? ? nil : description
-    version = RVM.ruby('print RUBY_VERSION').stdout and version = version.empty? ? nil : version
-    platform(engine, description, version)
+    platform(rvm_const('RUBY_ENGINE'), rvm_const('RUBY_DESCRIPTION'), rvm_const('RUBY_VERSION'))
+  end
+
+  def rvm_const(rc)
+    c = RVM.ruby("print #{rc}").stdout.strip and c = c.empty? ? nil : c
   end
 
   def windows?
@@ -130,8 +169,8 @@ private
   end
 
   def platform(engine = (defined?(RUBY_ENGINE) ? RUBY_ENGINE : nil),
-         description = (defined?(RUBY_DESCRIPTION) ? RUBY_DESCRIPTION : nil),
-         version = (defined?(RUBY_VERSION) ? RUBY_VERSION : nil))
+               description = (defined?(RUBY_DESCRIPTION) ? RUBY_DESCRIPTION : nil),
+               version = (defined?(RUBY_VERSION) ? RUBY_VERSION : nil))
     if engine && engine == 'jruby'
       :jruby
     elsif engine && engine == 'ironruby'

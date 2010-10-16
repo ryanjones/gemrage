@@ -1,0 +1,12 @@
+<% if @authentications %>
+<% else %>
+  <h2>Sign in with:</h2>
+  <ul>
+    <li><%= link_to "Twitter", auth_path(:twitter) %></li>
+    <li><%= link_to "OpenID", auth_path(:open_id) %></li>
+    <li>
+      <%= link_to "Sign Up", new_user_registration_path %> or 
+      <%= link_to "Sign In", new_user_session_path %> with a password.
+    </li>
+  </ul>
+<% end %>

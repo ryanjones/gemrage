@@ -36,8 +36,9 @@ group :test, :development do
   # local web server to handle long OpenID return URLs
   gem 'mongrel', '1.2.0.pre2'
 
-	gem 'rspec'
-	gem "rspec-rails"
-	gem 'webrat'
-	gem "autotest"
+  gem 'rspec'
+  gem "rspec-rails"
+  gem 'webrat'
+  gem "autotest"
+  gem 'ruby-debug'
 end
