@@ -56,6 +56,9 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   recipe :application_packages
 
   # http://github.com/railsmachine/moonshine_god
+  configure(:god => {
+    :log_file => "#{configuration[:deploy_to]}/shared/log/god.log"
+  })
   plugin :god
   recipe :god
 end
