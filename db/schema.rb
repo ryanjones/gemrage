@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101016182354) do
+ActiveRecord::Schema.define(:version => 20101016214013) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(:version => 20101016182354) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "payloads", :force => true do |t|
+    t.string   "uid"
+    t.string   "machine_id"
+    t.text     "payload"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payloads", ["uid"], :name => "index_payloads_on_uid", :unique => true
 
   create_table "rubygems", :force => true do |t|
     t.string   "name",                              :null => false
