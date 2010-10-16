@@ -6,4 +6,5 @@ gem 'bundler', '~> 1.0.3'
 group :development do
   gem 'rspec', '~> 2.0.0'
   gem 'jeweler'
+  gem 'macaddr'
 end
