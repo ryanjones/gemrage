@@ -14,7 +14,7 @@ class Gem::Commands::ScanCommand < Gem::Command
   include Gem::GemcutterUtilities
 
   def initialize
-    super('scan', description)
+    super('scan', description, :dir => '')
   end
 
   def description
@@ -30,6 +30,22 @@ class Gem::Commands::ScanCommand < Gem::Command
   end
 
   def execute
-    p 'Hello, World!'
+    p basic_scan.join(', ')
   end
+
+private
+
+  def basic_scan
+    Gem.source_index.map do |name, spec|
+      spec.name
+    end
+  end
+
+  def rvm_scan
+  end
+
+  def pik_scan
+  end
+
+  # Etc...
 end
