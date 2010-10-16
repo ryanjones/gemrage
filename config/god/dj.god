@@ -13,7 +13,7 @@ rails_root = "/srv/gemrage/current"
     # retart if memory gets too high
     w.transition(:up, :restart) do |on|
       on.condition(:memory_usage) do |c|
-        c.above = 300.megabytes
+        c.above = 150.megabytes
         c.times = 2
       end
     end
