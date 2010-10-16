@@ -16,9 +16,10 @@ class Gem::Commands::ScanCommand < Gem::Command
   include Gem::GemcutterUtilities
 
   GemrageHost = 'http://gemrage.com/'
+  # GemrageHost = 'http://localhost:3000/'
 
   def initialize
-    super('scan', description, :dir => '')
+    super('scan', description)
   end
 
   def description
@@ -34,10 +35,17 @@ class Gem::Commands::ScanCommand < Gem::Command
   end
 
   def execute
-    p system_scan
+    notify(send_system_to_gemrage(basic_scan))
   end
 
 private
+
+  def send_system_to_gemrage(gems)
+    RestClient.post(URI.join(GemrageHost, '/api/v1/payload/system.json').to_s, :payload => { :header => { :machine_id => mac_hash }, :installed_gems => gems })
+  end
+
+  def send_project_to_gemrage(payload)
+  end
 
   def system_scan
     if windows? && pik?
