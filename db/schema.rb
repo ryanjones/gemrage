@@ -10,16 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101016151824) do
-
-  create_table "platforms", :force => true do |t|
-    t.string "ruby",    :limit => 20, :null => false
-    t.string "version", :limit => 20, :null => false
-    t.string "group",   :limit => 20, :null => false
-  end
-
-  add_index "platforms", ["group"], :name => "index_platforms_on_group"
-  add_index "platforms", ["ruby", "version"], :name => "platforms_ruby_version", :unique => true
+ActiveRecord::Schema.define(:version => 20101016033438) do
 
   create_table "rubygems", :force => true do |t|
     t.string   "name",                              :null => false
