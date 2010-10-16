@@ -10,7 +10,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101016033438) do
+ActiveRecord::Schema.define(:version => 20101016175815) do
+
+  create_table "installed_gems", :force => true do |t|
+    t.integer  "user_id",      :null => false
+    t.integer  "rubygem_id",   :null => false
+    t.integer  "machine_id",   :null => false
+    t.integer  "platform_id",  :null => false
+    t.text     "version_list"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "installed_gems", ["machine_id"], :name => "index_installed_gems_on_machine_id"
+  add_index "installed_gems", ["platform_id"], :name => "index_installed_gems_on_platform_id"
+  add_index "installed_gems", ["rubygem_id"], :name => "index_installed_gems_on_rubygem_id"
+  add_index "installed_gems", ["user_id"], :name => "index_installed_gems_on_user_id"
+
+  create_table "machines", :force => true do |t|
+    t.integer "user_id",    :null => false
+    t.string  "identifier", :null => false
+  end
+
+  add_index "machines", ["user_id", "identifier"], :name => "index_machines_on_user_id_and_identifier", :unique => true
+
+  create_table "platforms", :force => true do |t|
+    t.string "code", :limit => 20, :null => false
+    t.string "name", :limit => 20, :null => false
+  end
+
+  add_index "platforms", ["code"], :name => "index_platforms_on_code", :unique => true
 
   create_table "rubygems", :force => true do |t|
     t.string   "name",                              :null => false
