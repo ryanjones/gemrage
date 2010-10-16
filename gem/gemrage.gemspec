@@ -13,7 +13,8 @@ Gem::Specification.new do |s|
   s.description = %q{Companion gem for gemrage.com}
   s.email = %q{darkhelmet@darkhelmetlive.com}
   s.files = [
-    ".document",
+    ".bundle/config",
+     ".document",
      ".gitignore",
      "Gemfile",
      "Gemfile.lock",
