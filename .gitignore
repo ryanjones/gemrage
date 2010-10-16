@@ -1,6 +1,7 @@
 .bundle
 !gem/.bundle
 db/*.sqlite3
+db/schema.db
 log/*.log
 tmp/**/*
 .rvmrc
