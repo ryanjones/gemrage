@@ -175,21 +175,21 @@ table .gem_version {
   float: right;
 }
 
-.login-form fieldset {
+.account-form fieldset {
   border: none;
   margin: 0;
   padding: 0;
 }
 
-.login-form fieldset ol li {
+.account-form fieldset ol li {
   list-style-type: none;
 }
 
-.login-form label {
+.account-form label {
   display: block;
 }
 
-.login-form label[for="user_remember_me"] {
+.account-form label[for="user_remember_me"] {
   display: inline;
 }
 
