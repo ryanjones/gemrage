@@ -16,11 +16,6 @@
     </div>
     <div id="container" class="rounded-corners box-shadow">
       <div class='inner rounded-corners'>
-<% [:info, :error].each do |key| %>
-   <% if flash[key] %>
-   <% end %>
- <% end %>
-        
         <% [:info, :notice, :error].each do |key| %>
           <% if flash[key] %>
             <div class="flash <%= key %>">
