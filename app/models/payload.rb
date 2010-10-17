@@ -14,10 +14,10 @@ class Payload < ActiveRecord::Base
   def self.process(user, payload_uid)
     payload = find_by_uid(payload_uid)
     data = JSON.parse(payload.payload)
-    
+
     Payload.transaction do
       machine_identifier = data['header']['machine_id']
-      
+
       # gem credentials
       
       # RVM/PIK
@@ -27,19 +27,19 @@ class Payload < ActiveRecord::Base
         machine = user.machines.find_or_create_by_identifier(machine_identifier)
         InstalledGem.process(machine, data['installed_gems'])
       end
-      
+
       # project gems
       if data.has_key?('projects')
         user.projects.process( data['projects'] )
       end
-      
+
       # Destroy payload after processing
       payload.destroy
-    end
-  
+    end if data
+
   # If anything breaks, this shouldn't happen
-  
-  #rescue 
+
+  #rescue
     # failed
     # hoptoad?
   end
