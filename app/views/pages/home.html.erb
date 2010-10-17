@@ -1,3 +1,4 @@
+<div id="home">
 <div id="plug">
   <h1>
     Share your gem list. Now.
@@ -15,21 +16,25 @@
     > gem scan .
     </pre>
   </div>
-  <p>2. A Internet Explorer / Firefox / Chrome browser will open.</p>
-  <p>3. Signup and start sharing!</p>
+  <p>3. Your internet browser will open.</p>
+  <p>4. Signup and start sharing!</p>
 
 </div>
 
 <div id="os_pos" class='rounded-corners box-shadow'>
-  <ul class="os">
-    <li>Compatibility: </li>
-    <li><%= image_tag 'windows.gif' %> Windows
-        <%= image_tag 'check.png' %> <li>
-    <li><%= image_tag 'linux.gif' %> Linux
-        <%= image_tag 'check.png' %> <li>
-    <li><%= image_tag 'mac.jpg' %> Macintosh
-        <%= image_tag 'check.png' %> <li>
-   </ul>
+  <h1>Compatibility</h1>
+  <div id="logos">
+    <%= image_tag 'windows.gif' %>
+    <%= image_tag 'linux.gif' %>
+    <%= image_tag 'mac.jpg' %>
+  </div>
+  <div id='list'>
+    <ul class="os">
+      <li>Windows</li>
+      <li>Linux</li>
+      <li>Macintosh</li>
+    </ul>
+  </div>
 </div>
 
 <div id="information" class="rounded-corners">
@@ -40,10 +45,11 @@
     <li>Learn about gems installed within your projects</li>
   </ul>
 
-  <h1>Worried about privacy with Gem Rage? Don't!</h1>
+  <h1>Worried about privacy? Don't!</h1>
     <ul>
       <li>You can delete projects that you don't want shared</li>
       <li>You can rename projects so you don't display your repository name</li>
     </ul>
 </div>
 
+</div>
