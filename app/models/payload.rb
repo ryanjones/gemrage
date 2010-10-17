@@ -20,6 +20,7 @@ class Payload < ActiveRecord::Base
       
       # gem credentials
       
+      # RVM/PIK
       
       # installed gems
       if data.has_key?('installed_gems')
