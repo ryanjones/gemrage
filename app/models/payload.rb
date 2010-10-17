@@ -10,8 +10,7 @@ class Payload < ActiveRecord::Base
 
   class << self
     def create_from_params(params)
-      pay = params[:payload]
-      create(:machine_id => pay[:header][:machine_id], :payload => (pay[:installed_gems] || pay[:projects]).to_json)
+      create(:machine_id => 'meh', :payload => params[:payload].to_json)
     end
   end
 
@@ -21,11 +20,23 @@ class Payload < ActiveRecord::Base
 
   def self.process(user, payload_uid)
     payload = find_by_uid(payload_uid)
-
+    data = JSON.parse(payload.payload)
+    
     Payload.transaction do
-      machine = user.machines.find_or_create_by_identifier(payload.machine_id)
-      InstalledGem.process(machine, JSON.parse(payload.payload))
-      # ProjectGem.process
+      machine_identifier = data['header']['machine_id']
+      
+      # installed gems
+      if data.has_key?('installed_gems')
+        machine = user.machines.find_or_create_by_identifier(machine_identifier)
+        InstalledGem.process(machine, data['installed_gems'])
+      end
+      
+      # project gems
+      if data.has_key?('projects')
+        user.projects.process( data['projects'] )
+      end
+      
+      # kill payload
     end
   end
 
