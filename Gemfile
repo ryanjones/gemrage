@@ -10,6 +10,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'daemons', :git => 'git://github.com/ghazel/daemons.git' # This is a better daemons gem
 gem 'delayed_job', '~> 2.1.0.pre2', :git => 'git://github.com/collectiveidea/delayed_job.git'
+gem 'yajl-ruby', '~> 0.7.7', :require => 'yajl/json_gem' # JSON
 
 group :production do
   # moonshine puppety goodness
@@ -29,4 +30,5 @@ group :test, :development do
   gem "rspec-rails"
   gem 'webrat'
   gem "autotest"
+  gem 'ruby-debug'
 end
