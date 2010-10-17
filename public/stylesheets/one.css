@@ -12,6 +12,7 @@
   margin: 0 auto;
   width: 542px;
   height: 256px;
+  border: none;
 }
 
 #header h1 { margin: 0; }
@@ -120,26 +121,38 @@
 }
 
 .os li {
+  display: block;
   display: inline;
   font-size:18px;
-  position:relative;
   background-color:#fff;
   padding-left: 15px;
   font-size: 11pt;
   font-family: veranda, sans-serif; 
   font-variant: small-caps;
   font-weight: bold;
+  align:middle;
 }
 
 #black_box
 {
   margin: 0 auto;
-  height: 80px;
+  height: 52px;
   width: 580px;
   background-color:#000;
   color:#66FF00;
   vertical-align:middle;
-  
+}
+
+#plug
+{
+  color:white;
+  margin: 0 auto;
+  background-color:#000;
+  vertical-align:middle;
+  font-family: veranda, sans-serif; 
+  font-variant: small-caps;
+  font-weight: bold;
+  text-align:center;
 }
 
 table.color tr:nth-child(2n) {
