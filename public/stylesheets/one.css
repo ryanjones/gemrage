@@ -208,3 +208,9 @@ table .gem_version {
   -webkit-box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.75);
 }
+
+#stats {
+  border: 2px solid black;
+  width: 100%;
+  margin: 25px auto;
+}
