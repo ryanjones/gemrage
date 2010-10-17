@@ -26,7 +26,10 @@ img {
   border: none;
 }
 
-#nav { float:right; }
+#nav { 
+  text-align:right;
+  font-weight: bold;
+  }
 
 #content
 {
@@ -269,7 +272,7 @@ table .gem_version {
 }
 
 .flash {
-  padding:15px;
+  padding:20px;
   margin: 0 auto;
   width: 700px;
   position: absolute;
