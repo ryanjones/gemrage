@@ -31,5 +31,5 @@ Gemrage::Application.routes.draw do
   get '/:handle/gems' => 'profiles#public_gems', :as => :user_gems
   get '/:handle/:slug' => 'projects#show', :as => :user_project
 
-  root :to => "home#index"
+  root :to => "pages#home"
 end
