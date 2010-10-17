@@ -16,7 +16,7 @@ class Rubygem < ActiveRecord::Base
 
   # case-sensitive find/create
   def self.cs_find_or_create_by_name(name)
-    cs_find_by_name(name) || create(:name => name, :queue => true)
+    cs_find_by_name(name) || create!(:name => name, :queue => true)
   end
 
   def self.cs_find_by_name(name)
