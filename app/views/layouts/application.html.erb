@@ -10,8 +10,17 @@
 
   <body>
     <%= render 'layouts/header' %>
+    <div id="nav">
+      <%= render 'shared/auth_nav' %>
+    </div>
     <div id="container" class="rounded-corners">
-    <%= yield %>
+      <div class='inner rounded-corners'>
+        <%= yield %>
+      </div>
     </div>
   </body>
+  <script type="text/javascript">
+    var rumbleUrl = 'http://railsrumble.com';
+  </script>
+  <script type="text/javascript" src="http://blog.railsrumble.com/javascripts/rumble-r10-sash.js"></script>
 </html>

@@ -27,6 +27,11 @@ class Payload < ActiveRecord::Base
       InstalledGem.process(machine, JSON.parse(payload.payload))
       # ProjectGem.process
     end
+
+    payload.destroy # Destroy after processing
+    # If anything breaks, this shouldn't happen
+  rescue
+    # Don't care
   end
 
 private
