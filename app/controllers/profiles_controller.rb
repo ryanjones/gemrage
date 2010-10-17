@@ -4,4 +4,10 @@ class ProfilesController < ApplicationController
       @payload = Payload.find_by_uid(session[:payload])
     end
   end
+
+  def public_profile
+  end
+
+  def public_gems
+  end
 end
