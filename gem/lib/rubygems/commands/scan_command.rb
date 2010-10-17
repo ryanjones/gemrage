@@ -15,8 +15,8 @@ Bundler.require
 class Gem::Commands::ScanCommand < Gem::Command
   include Gem::GemcutterUtilities
 
-  GemrageHost = 'http://gemrage.com/'
-  # GemrageHost = 'http://localhost:3000/'
+  #GemrageHost = 'http://gemrage.com/'
+  GemrageHost = 'http://localhost:3000/'
 
   def initialize
     super('scan', description)

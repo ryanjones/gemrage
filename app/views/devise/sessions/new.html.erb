@@ -15,3 +15,9 @@
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>
+
+<h2>Or sign in with:</h2>
+<ul>
+  <li><%= link_to "Twitter", auth_path(:twitter) %></li>
+  <li><%= link_to "OpenID", auth_path(:open_id) %></li>
+</ul>
