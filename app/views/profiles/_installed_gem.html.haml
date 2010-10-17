@@ -1,9 +1,7 @@
-
 %tr
   %td.gem_name&= link_to(rg.rubygem.name, 'http://rubygems.org/gems/' + rg.rubygem.name)
-  %td= rg.rubygem.info
+  %td= truncate(rg.rubygem.info)
   %td= rg.machine_count
   %td= rg.platform_count
-  
-  %td.gem_version= rg.version_list
+  %td= rg.version_list
   %td= rg.rubygem.latest_version
