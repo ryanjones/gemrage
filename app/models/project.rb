@@ -14,7 +14,7 @@ class Project < ActiveRecord::Base
                   create(:name => data['name'], 
                          :identifier => identifier,
                          :origin => data['origin'])
-        project.gems.process(project.user, data['gems'])
+        project.gems.process(project, data['gems'])
       end
     end
   end
