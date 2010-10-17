@@ -1,9 +1,8 @@
 class PayloadsController < ApplicationController
 
   before_filter :authenticate_user!
-  
+
   def show
-#    render(:text => Payload.where(:uid => params[:id]).first.payload)
     results = Payload.where(:uid => params[:id])
     if results.empty?
       render :nopayload, :status => 404
