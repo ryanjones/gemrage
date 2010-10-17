@@ -1,5 +1,7 @@
 %tr
-  %td&= link_to(project_gem.rubygem.name, rubygem_path(project_gem.rubygem))
-  %td&= truncate(project_gem.rubygem.info, :length => 150)
-  %td&= project_gem.version
-  %td&= project_gem.rubygem.latest_version
+  %td
+    .gem
+      %span.name= link_to(project_gem.rubygem.name, 'http://rubygems.org/gems/' + project_gem.rubygem.name)
+      %span.version= project_gem.version
+    .info= truncate(project_gem.rubygem.info, :length => 150, :separator => ' ')
+  %td= project_gem.rubygem.latest_version
