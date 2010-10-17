@@ -72,6 +72,7 @@ private
     h = {}
     Dir[File.join(dir, '**', '{Gemfile,gemfile}')].each do |gemfile|
       dir = File.dirname(gemfile)
+      next if dir =~ /vendor/ # Stupid vendor directories
       notify("Trying to process a Gemfile found in #{dir}")
       project_name = File.basename(dir)
       project_id = Digest::SHA1.hexdigest(dir)
@@ -113,20 +114,20 @@ private
 
   def system_scan
     if windows? && pik?
-      notify("Scanning with pik")
+      notify('Scanning with pik')
       pik_scan
     elsif !windows? && rvm? && !options[:force_basic]
       if :jruby == platform
-        notify("You are using jRuby and have RVM. Oh boy...",
+        notify('You are using jRuby and have RVM. Oh boy...',
                "We'd like to make use of RVM, but using RVM from jRuby is...interesting.",
                "We'll just do a basic scan, and you can rescan using a non-jRuby VM if you want RVM support.")
         basic_scan
       else
-        notify("Scanning with RVM...this might take a while")
+        notify('Scanning with RVM...this might take a while')
         rvm_scan
       end
     else
-      notify("Scanning with basic gem support")
+      notify('Scanning with basic gem support')
       basic_scan
     end
   end
