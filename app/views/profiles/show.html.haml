@@ -3,7 +3,7 @@
   %br/
   - if @payload
     = button_to('Import', { :controller => 'payloads', :action => 'update', :id => @payload.uid }, :method => :put)
-  %table{ :border => 0, :cellspacing => 5, :cellpadding => 5 }
+  %table.color{ :border => 0, :cellspacing => 5, :cellpadding => 5 }
     %tr
       %th Gem
       %th Version

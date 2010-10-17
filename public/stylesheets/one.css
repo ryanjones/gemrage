@@ -92,7 +92,7 @@
   background-color:#000;
 }
 
-#profile tr:nth-child(2n) {
+table.color tr:nth-child(2n) {
   background: #98F5FF;
   color: black;
 }
@@ -102,4 +102,20 @@
   color: black;
   padding: 15px;
   min-height: 500px;
+}
+
+#public_gems table {
+  width: 100%;
+}
+
+#public_gems table td {
+  padding: 5px;
+}
+
+table .gem_name {
+  font-size: 125%;
+}
+
+table .gem_version {
+  font-size: 125%;
 }
