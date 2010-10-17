@@ -1,0 +1,6 @@
+= form_for(@project) do |f|
+  = f.label(:name)
+  = f.text_field(:name)
+  %br
+  = f.submit
+  = link_to('Cancel', user_project_path(@project.user.handle, @project.to_param))

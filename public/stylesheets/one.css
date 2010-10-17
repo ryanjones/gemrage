@@ -38,7 +38,8 @@ img {
 {
   margin: 0 auto;
   width: 214px;
-  height: 87px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 #quickstart
