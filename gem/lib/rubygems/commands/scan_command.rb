@@ -69,27 +69,30 @@ private
   end
 
   def project_scan(dir)
-    Dir[File.join(dir, '**', '{Gemfile,gemfile}')].map do |gemfile|
-      notify("Trying to process a Gemfile found in #{File.dirname(gemfile)}")
-      project_name = File.basename(File.dirname(gemfile))
-      project_id = Digest::SHA1.hexdigest(File.dirname(gemfile))
+    h = {}
+    Dir[File.join(dir, '**', '{Gemfile,gemfile}')].each do |gemfile|
+      dir = File.dirname(gemfile)
+      notify("Trying to process a Gemfile found in #{dir}")
+      project_name = File.basename(dir)
+      project_id = Digest::SHA1.hexdigest(dir)
       lockfile = parse_lockfile("#{gemfile}.lock")
 
       begin
         d = Bundler::Definition.build(gemfile, nil, nil)
         deps = d.current_dependencies
-        {
+        info =  {
           :name => project_name,
-          :identifier => project_id,
           :gems => Hash[*deps.map do |dep|
             [dep.name, lockfile[dep.name] || dep.requirement.to_s]
           end.flatten]
         }
+        git_url = find_git_url(dir) and info[:origin] = Digest::SHA1.hexdigest(git_url.split.last)
+        h[project_id] = info
       rescue Exception => boom
         # Maybe it's an old Gemfile
-        nil
       end
-    end.compact
+    end
+    h
   end
 
   def parse_lockfile(lockfile)
@@ -211,6 +214,17 @@ private
 
   def mac_hash
     Digest::SHA1.hexdigest(Mac.addr)
+  end
+
+  def find_git_url(wd)
+    Dir.chdir(wd) do
+      config = '.git/config'
+      if File.exists?(config)
+        lines = File.readlines(config).map { |line| line.strip }.join("\n").split('[remote "origin"]').last.strip.split("\n").select { |line| line =~ /^url/ }.first
+      else
+        nil
+      end
+    end
   end
 
   def parse_gem_list(stdout, plat = platform)
