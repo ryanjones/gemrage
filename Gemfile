@@ -29,5 +29,4 @@ group :test, :development do
   gem "rspec-rails"
   gem 'webrat'
   gem "autotest"
-  gem 'ruby-debug'
 end
