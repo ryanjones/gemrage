@@ -14,6 +14,7 @@ require 'uri'
 require 'rvm'
 require 'rest-client'
 require 'json'
+require 'macaddr'
 
 class Gem::Commands::ScanCommand < Gem::Command
   include Gem::GemcutterUtilities
