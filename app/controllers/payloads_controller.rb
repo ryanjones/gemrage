@@ -15,6 +15,9 @@ class PayloadsController < ApplicationController
   end
 
   def update
-    
+    Payload.process(current_user, params[:id])
+    session[:payload] = nil
+    flash[:notice] = "Payload importing. W00t!"
+    redirect_to profile_url
   end
 end
