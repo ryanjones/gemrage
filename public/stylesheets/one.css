@@ -16,7 +16,6 @@ img {
   margin: 0 auto;
   width: 750px;
   background:#000;
-  min-height: 550px;
 }
 
 #header
@@ -154,7 +153,6 @@ table.color tr:nth-child(2n) {
   background: white;
   color: black;
   padding: 15px;
-  min-height: 500px;
 }
 
 #public_gems table {
