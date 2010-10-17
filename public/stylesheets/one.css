@@ -18,6 +18,10 @@ img {
   background:#000;
 }
 
+.inner {
+  min-height: 200px;
+}
+
 #header
 {
   margin: 0 auto;
