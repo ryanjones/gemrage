@@ -28,6 +28,7 @@ group :production do
 
   # Keep things alive
   gem 'god', '~> 0.11.0', :require => nil
+  gem 'dalli', '~> 0.10.0' # memcached
 end
 
 group :test, :development do
@@ -43,5 +44,5 @@ group :test, :development do
   gem 'webrat'
   gem "autotest"
   gem 'ruby-debug'
-	gem 'awesome_print', :require => 'ap'
+  gem 'awesome_print', :require => 'ap'
 end

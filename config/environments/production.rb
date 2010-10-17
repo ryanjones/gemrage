@@ -49,4 +49,6 @@ Gemrage::Application.configure do
 
   # for devise
   config.action_mailer.default_url_options = { :host => 'gemrage.com' }
+
+  config.cache_store = :dalli_store
 end

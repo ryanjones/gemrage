@@ -2,6 +2,14 @@ html, body, * {
   font-family: 'Cantarell', 'Helvetica', 'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, sans-serif;
 }
 
+img {
+  border: 0;
+}
+
+#home h1 {
+  font-variant: small-caps;
+}
+
 #container
 {
   padding:15px;
@@ -15,11 +23,8 @@ html, body, * {
 {
   margin: 0 auto;
   width: 542px;
-  height: 256px;
   border: none;
 }
-
-#header h1 { margin: 0; }
 
 #nav { float:right; }
 
@@ -31,74 +36,66 @@ html, body, * {
 
 #footer
 {
-  background:#ccc;
-  text-align: right;
-  padding: 20px;
-  height: 1%;
+  margin: 0 auto;
+  width: 305px;
+  height: 124px;
 }
 
 #quickstart
 {
   margin: 0 auto;
-  margin-top:10px;
+  margin-top: 10px;
   width: 600px;
-  background-color:#FFF;
   padding: 5px;
-}
-
-#quickstart h1
-{
-  color:#000;
-  font-variant: small-caps;
-  font-size: 11pt;
-  margin-left:8px;
 }
 
 #quickstart p
 {
-  color:#000;
-  font-size: 10pt;
-  margin-left:8px;
+  margin-left: 8px;
 }
 
 #os_pos
 {
   margin: 20px auto;
+  padding: 5px 20px;
   width: 600px;
   border: 5px solid black;
+}
+
+#os_pos h1 {
+  margin: 0px;
+}
+
+#logos {
+  text-align: center;
+  float: right;
+  padding-top: 25px;
+  width: 75%;
+}
+#logos img {
+  margin: 0px 20px;
+}
+
+#list {
+  width: 25%;
 }
 
 #information
 {
   margin: 0 auto;
-  margin-top:10px;
+  margin-top: 10px;
   width: 600px;
-  height:200px;
-  background-color:#FFF;
   padding: 5px;
-}
-
-#information h1
-{
-  color:#000;
-  font-variant: small-caps;
-  font-size: 12pt;
-  margin-left:8px;
-  font-weight: bold;
 }
 
 #information p
 {
-  color:#000;
-  font-size: 10pt;
-  margin-left:8px;
+  margin-left: 8px;
 }
 
 #information li
 {
-  color:#000;
-  font-size: 10pt;
-  margin-left:8px;
+  margin-left: 8px;
 }
 
 .rounded-corners {
@@ -116,14 +113,10 @@ html, body, * {
 }
 
 .os li {
-  display: block;
-  display: inline;
-  font-size:18px;
-  padding-left: 15px;
-  font-size: 11pt;
+  font-size: 150%;
+  list-style-image: url(/images/check.png);
   font-variant: small-caps;
   font-weight: bold;
-  align:middle;
 }
 
 #black_box
