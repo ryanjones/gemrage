@@ -26,7 +26,7 @@ img {
   border: none;
 }
 
-#nav { 
+#nav {
   text-align:right;
   font-weight: bold;
   }
@@ -165,12 +165,12 @@ table.color tr:nth-child(2n) {
 }
 
 a {
-	color: #900;
-	text-decoration: none;
+  color: #900;
+  text-decoration: none;
 }
 
 a:hover {
-	text-decoration:underline;
+  text-decoration:underline;
 }
 
 /* @group Gems */
@@ -181,28 +181,28 @@ table#gems tr {
 }
 
 table#gems tr.header th {
-	text-align: left;
-	border-bottom: 2px solid #666;
+  text-align: left;
+  border-bottom: 2px solid #666;
 }
 
 table#gems th.numeric, table#gems td.numeric {
-	text-align: right;
+  text-align: right;
 }
 
 table#gems td, table#gems th {
-	padding-left: 10px;
-	padding-right: 10px;
-	margin: 0;
-	border: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0;
+  border: none;
 }
 
 table#gems tr {
-	background: #CCC;
+  background: #CCC;
 }
 
 table#gems tr.header {
-	background: #a6ae4c;
-	font-size: 18px;
+  background: #a6ae4c;
+  font-size: 18px;
 }
 
 table#gems tr:nth-child(2n) {
@@ -211,23 +211,23 @@ table#gems tr:nth-child(2n) {
 }
 
 .gem .name {
-	font-size: 18px;
+  font-size: 18px;
 }
 
 .gem .version {
-	font-size: 14px;
-	vertical-align: top;
+  font-size: 14px;
+  vertical-align: top;
 }
 
 #gems .info {
-	font-size: 14px;
-	color: #666;
+  font-size: 14px;
+  color: #666;
 }
 
 /* @end */
 
 .back {
-	font-size: 18px;
+  font-size: 18px;
 }
 
 #profile .gravatar {
@@ -311,3 +311,15 @@ table#gems tr:nth-child(2n) {
 
 }
 
+#stats_page table {
+  width: 100%;
+}
+
+#stats_page table tr:nth-child(2n) {
+  background: #eee;
+  color: black;
+}
+
+.tcenter {
+  text-align: center;
+}

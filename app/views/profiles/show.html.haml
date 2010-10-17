@@ -3,10 +3,12 @@
   %h1#handle&= link_to(current_user.handle, user_profile_path(current_user.handle))
   - if @payload
     #import
-      %p You have a pending gemrage payload to import. To make it yours, just claim it. 
+      %p You have a pending gemrage payload to import. To make it yours, just claim it.
       = button_to('Claim', { :controller => 'payloads', :action => 'update', :id => @payload.uid }, :method => :put)
   %ul
     %li= link_to('Installed Gems', user_gems_path(current_user.handle))
+    %li= link_to('My Projects', user_profile_path(current_user.handle))
+    %li= link_to('System Stats', stats_path)
   %ul
     %li change user password
     %li change project names
