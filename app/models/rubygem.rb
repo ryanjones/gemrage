@@ -28,6 +28,14 @@ class Rubygem < ActiveRecord::Base
   end
 
   def update_from_rubygems!
+    json = JSON.parse(RestClient.get("http://rubygems.org/api/v1/gems/#{name}.json"))
+    update_attributes({
+      :latest_version => json['version'],
+      :info => json['info'],
+      :downloads => json['downloads']
+    })
+  rescue RestClient::ResourceNotFound => not_found
+    # This gem doesn't exist on rubygems. Don't worry about it
   end
 
   # Async version
