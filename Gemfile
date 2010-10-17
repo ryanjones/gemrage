@@ -43,4 +43,5 @@ group :test, :development do
   gem 'webrat'
   gem "autotest"
   gem 'ruby-debug'
+	gem 'awesome_print', :require => 'ap'
 end
