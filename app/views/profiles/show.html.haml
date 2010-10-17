@@ -1,0 +1,10 @@
+#profile
+  %h1#handle&= current_user.handle
+  %br/
+  - if @payload
+    = button_to('Import', { :controller => 'payloads', :action => 'update', :id => @payload.uid }, :method => :put)
+  %h2 Your poop here
+  %ul
+    %li change user password
+    %li change project names
+    %li change your career

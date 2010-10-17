@@ -38,6 +38,11 @@ class Payload < ActiveRecord::Base
       
       # kill payload
     end
+
+    payload.destroy # Destroy after processing
+    # If anything breaks, this shouldn't happen
+  rescue
+    # Don't care
   end
 
 private

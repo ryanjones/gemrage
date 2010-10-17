@@ -5,6 +5,7 @@ gem 'bundler', '~> 1.0.3'
 gem 'macaddr', '~> 1.0.0'
 gem 'rvm', '~> 1.0.14'
 gem 'json_pure', '~> 1.4.6', :require => 'json'
+gem 'launchy', '~> 0.3.7'
 
 group :development do
   gem 'rspec', '~> 2.0.0'

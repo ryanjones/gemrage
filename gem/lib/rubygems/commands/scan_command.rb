@@ -15,15 +15,23 @@ require 'rvm'
 require 'rest-client'
 require 'json'
 require 'macaddr'
+require 'launchy'
 
 class Gem::Commands::ScanCommand < Gem::Command
   include Gem::GemcutterUtilities
 
-  # GemrageHost = 'http://gemrage.com/'
-  GemrageHost = 'http://localhost:3000/'
+  GemrageHost = 'http://gemrage.com/'
 
   def initialize
     super('scan', description)
+    defaults.merge!(:host => GemrageHost, :force_basic => false)
+    add_option('-H', '--host HOST', 'Host to push to. Really only so we can debug') do |v, o|
+      o[:host] = v
+    end
+
+    add_option('-b', '--basic', 'Force a basic scan') do |v,o|
+      o[:force_basic] = true
+    end
   end
 
   def description
@@ -40,25 +48,29 @@ class Gem::Commands::ScanCommand < Gem::Command
 
   def execute
     if dir = get_one_optional_argument
-      notify(send_project_to_gemrage(project_scan(File.expand_path(dir))))
+      send_project_to_gemrage(project_scan(File.expand_path(dir)))
     else
-      # notify(send_system_to_gemrage(system_scan))
-      notify(send_system_to_gemrage(basic_scan))
+      send_system_to_gemrage(system_scan)
     end
   end
 
 private
 
   def send_system_to_gemrage(gems)
-    JSON.parse(RestClient.post(URI.join(GemrageHost, '/api/v1/payload/system.json').to_s, :payload => { :header => { :machine_id => mac_hash }, :installed_gems => gems }))['location']
+    json = JSON.parse(RestClient.post(URI.join(options[:host], '/api/v1/payload/system.json').to_s, :payload => { :header => { :machine_id => mac_hash }, :installed_gems => gems }))
+    notify(json['error']) if json['error']
+    Launchy.open(json['location'])
   end
 
   def send_project_to_gemrage(payload)
-    JSON.parse(RestClient.post(URI.join(GemrageHost, '/api/v1/payload/system.json').to_s, :payload => { :header => { :machine_id => mac_hash }, :projects => payload }))['location']
+    json = JSON.parse(RestClient.post(URI.join(options[:host], '/api/v1/payload/system.json').to_s, :payload => { :header => { :machine_id => mac_hash }, :projects => payload }))
+    notify(json['error']) if json['error']
+    Launchy.open(json['location'])
   end
 
   def project_scan(dir)
-    Dir[File.join(dir, '**', '{Gemfile}')].map do |gemfile|
+    Dir[File.join(dir, '**', '{Gemfile,gemfile}')].map do |gemfile|
+      notify("Trying to process a Gemfile found in #{File.dirname(gemfile)}")
       project_name = File.basename(File.dirname(gemfile))
       project_id = Digest::SHA1.hexdigest(File.dirname(gemfile))
       lockfile = parse_lockfile("#{gemfile}.lock")
@@ -100,9 +112,16 @@ private
     if windows? && pik?
       notify("Scanning with pik")
       pik_scan
-    elsif !windows? && rvm?
-      notify("Scanning with RVM...this might take a while")
-      rvm_scan
+    elsif !windows? && rvm? && !options[:force_basic]
+      if :jruby == platform
+        notify("You are using jRuby and have RVM. Oh boy...",
+               "We'd like to make use of RVM, but using RVM from jRuby is...interesting.",
+               "We'll just do a basic scan, and you can rescan using a non-jRuby VM if you want RVM support.")
+        basic_scan
+      else
+        notify("Scanning with RVM...this might take a while")
+        rvm_scan
+      end
     else
       notify("Scanning with basic gem support")
       basic_scan

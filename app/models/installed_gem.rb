@@ -1,17 +1,18 @@
 class InstalledGem < ActiveRecord::Base
   belongs_to :user
   belongs_to :machine
-  
+
   belongs_to :rubygem
   belongs_to :platform
-  
+
   # Process installed_gems payload from gem scanner
   # { name => { platform => version_list, ... }, ... }
   def self.process(machine, payload)
     # TODO: create/update/delete
     payload.map do |name, platform_data|
       process_gem(name, platform_data).each do |attributes|
-        create(attributes.merge(
+        # Throw exception so we can catch it if something fails
+        create!(attributes.merge(
           {:user_id => machine.user_id, :machine_id => machine.id})
         )
       end
@@ -36,5 +37,5 @@ private
       { :platform_id => Platform.id_for_code(platform), :version_list => versions }
     end
   end
-  
+
 end
