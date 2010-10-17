@@ -1,6 +1,6 @@
 #profile
   = gravatar(current_user)
-  %h1#handle&= current_user.handle
+  %h1#handle&= link_to(current_user.handle, user_profile_path(current_user.handle))
   - if @payload
     %br
     = button_to('Import', { :controller => 'payloads', :action => 'update', :id => @payload.uid }, :method => :put)
