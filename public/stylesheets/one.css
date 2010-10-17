@@ -169,3 +169,7 @@ table .gem_name {
 table .gem_version {
   font-size: 125%;
 }
+
+#profile .gravatar {
+  float: right;
+}
