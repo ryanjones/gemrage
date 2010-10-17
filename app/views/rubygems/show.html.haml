@@ -4,10 +4,13 @@
   %hr
   %h3 It does what now?
   &= @rubygem.info
-  %h3 How many times?
-  &= "#{@rubygem.downloads} Downloads"
-  %h3 Latest Version
-  &= @rubygem.latest_version
-  %h3 Graph time!
-  #stats
-    Stats go here!
+  - gs = gem_stats(@rubygem)
+  %table#stats.rounded-corners.box-shadow
+    %tr{ :align => 'center' }
+      %td Latest Version
+      - gs.keys.each do |k|
+        %td&= k
+    %tr{ :align => 'center' }
+      %td&= @rubygem.latest_version
+      - gs.keys.each do |k|
+        %td&= gs[k]
