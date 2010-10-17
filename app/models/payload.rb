@@ -4,15 +4,8 @@ class Payload < ActiveRecord::Base
   before_validation :uid!
 
   validates_presence_of :uid
-  validates_presence_of :machine_id
   validates_presence_of :payload
   validates_uniqueness_of :uid
-
-  class << self
-    def create_from_params(params)
-      create(:machine_id => 'meh', :payload => params[:payload].to_json)
-    end
-  end
 
   def to_param
     uid
@@ -25,6 +18,9 @@ class Payload < ActiveRecord::Base
     Payload.transaction do
       machine_identifier = data['header']['machine_id']
       
+      # gem credentials
+      
+      
       # installed gems
       if data.has_key?('installed_gems')
         machine = user.machines.find_or_create_by_identifier(machine_identifier)
@@ -36,13 +32,15 @@ class Payload < ActiveRecord::Base
         user.projects.process( data['projects'] )
       end
       
-      # kill payload
+      # Destroy payload after processing
+      payload.destroy
     end
-
-    payload.destroy # Destroy after processing
-    # If anything breaks, this shouldn't happen
-  rescue
-    # Don't care
+  
+  # If anything breaks, this shouldn't happen
+  
+  #rescue 
+    # failed
+    # hoptoad?
   end
 
 private
