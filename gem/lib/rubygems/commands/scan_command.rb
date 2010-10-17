@@ -72,6 +72,7 @@ private
     h = {}
     Dir[File.join(dir, '**', '{Gemfile,gemfile}')].each do |gemfile|
       dir = File.dirname(gemfile)
+      next if dir =~ /vendor/ # Stupid vendor directories
       notify("Trying to process a Gemfile found in #{dir}")
       project_name = File.basename(dir)
       project_id = Digest::SHA1.hexdigest(dir)
