@@ -20,6 +20,9 @@
             </div>
           <% end %>
         <% end %>
+        <div id="nav">
+          <%= render 'shared/auth_nav' %>
+        </div>
         <%= yield %>
       </div>
     </div>
@@ -28,7 +31,7 @@
   </body>
 
   <script type="text/javascript">
-    var rumbleUrl = 'http://railsrumble.com';
+    var rumbleUrl = 'http://railsrumble.com/teams/proc-block-and-two-smoking-lambdas';
   </script>
   <script type="text/javascript" src="http://blog.railsrumble.com/javascripts/rumble-r10-sash.js"></script>
 </html>
