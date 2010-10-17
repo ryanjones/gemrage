@@ -31,10 +31,9 @@ html, body, * {
 
 #footer
 {
-  background:#ccc;
-  text-align: right;
-  padding: 20px;
-  height: 1%;
+  margin: 0 auto;
+  width: 305px;
+  height: 124px;
 }
 
 #quickstart
@@ -64,7 +63,7 @@ html, body, * {
 #os_pos
 {
   margin: 20px auto;
-  width: 600px;
+  width: 690px;
   border: 5px solid black;
 }
 
