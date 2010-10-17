@@ -83,3 +83,8 @@
   background: white;
   min-height: 500px;
 }
+
+#profile tr:nth-child(2n) {
+  background: #98F5FF;
+  color: black;
+}
