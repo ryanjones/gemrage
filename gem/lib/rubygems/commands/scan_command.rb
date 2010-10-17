@@ -69,7 +69,8 @@ private
   end
 
   def project_scan(dir)
-    Dir[File.join(dir, '**', '{Gemfile}')].map do |gemfile|
+    Dir[File.join(dir, '**', '{Gemfile,gemfile}')].map do |gemfile|
+      notify("Trying to process a Gemfile found in #{File.dirname(gemfile)}")
       project_name = File.basename(File.dirname(gemfile))
       project_id = Digest::SHA1.hexdigest(File.dirname(gemfile))
       lockfile = parse_lockfile("#{gemfile}.lock")
