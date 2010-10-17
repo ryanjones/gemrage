@@ -41,23 +41,23 @@
 {
   margin: 0 auto;
   width: 600px;
-  background-color:#555;
+  height:270px;
+  background-color:#ECE;
   padding: 5px;
 }
 
-#OSs
+#os_pos
 {
   margin: 0 auto;
   width: 600px;
-  background-color:#fff;
-  padding: 5px;
+  background-color:#000;
 }
 
 #information
 {
   margin: 0 auto;
   width: 600px;
-  background-color:#666;
+  background-color:#ECE;
   padding: 5px;
 }
 
@@ -74,4 +74,19 @@
   display:inline-block;
   zoom:1;
   *display:inline;  
+}
+
+.os li {
+  display: inline;
+  font-size:18px;
+  position:relative;
+  background-color:#fff;
+}
+
+#black_box
+{
+  margin: 0 auto;
+  height: 100px;
+  width: 580px;
+  background-color:#000;
 }
