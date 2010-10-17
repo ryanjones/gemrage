@@ -1,4 +1,13 @@
 <div id='profile' class='rounded-corners'>
   <h1 id='handle'><%= h(current_user.handle) %></h1>
   <hr />
+  <table border="0" cellspacing="5" cellpadding="5">
+    <tr>
+      <th>
+        <td>Gem</td>
+        <td>Version</td>
+      </th>
+    </tr>
+    <%= render(:partial => 'installed_gem', :collection => current_user.installed_gems.includes(:rubygem), :as => :rg) %>
+  </table>
 </div>
