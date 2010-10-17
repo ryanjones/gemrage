@@ -4,8 +4,7 @@
   margin: 0 auto;
   width: 750px;
   background:#000;
-  min-height: 600px;
-  color: white;
+  min-height: 550px;
 }
 
 #header
@@ -23,12 +22,7 @@
   padding: 20px;
 }
 
-#content h2
-{
-  color:#000;
-  font-size: 160%;
-  margin: 0 0 .5em;
-}
+
 
 #footer
 {
@@ -41,25 +35,73 @@
 #quickstart
 {
   margin: 0 auto;
+  margin-top:10px;
   width: 600px;
-  height:270px;
-  background-color:#ECE;
+  height:250px;
+  background-color:#FFF;
   padding: 5px;
+}
+
+#quickstart h1
+{
+  color:#000;
+  font-family: veranda, sans-serif; 
+  font-variant: small-caps;
+  font-size: 11pt;
+  margin-left:8px;
+}
+
+#quickstart p
+{
+  color:#000;
+  font-family: veranda, sans-serif; 
+  font-size: 10pt;
+  margin-left:8px;
 }
 
 #os_pos
 {
   margin: 0 auto;
   width: 600px;
-  background-color:#000;
+  background-color:#fff;
+  margin-top:20px;
+  margin-bottom:20px;
 }
 
 #information
 {
   margin: 0 auto;
+  margin-top:10px;
   width: 600px;
-  background-color:#ECE;
+  height:200px;
+  background-color:#FFF;
   padding: 5px;
+}
+
+#information h1
+{
+  color:#000;
+  font-family: veranda, sans-serif; 
+  font-variant: small-caps;
+  font-size: 12pt;
+  margin-left:8px;
+  font-weight: bold;
+}
+
+#information p
+{
+  color:#000;
+  font-family: veranda, sans-serif; 
+  font-size: 10pt;
+  margin-left:8px;
+}
+
+#information li
+{
+  color:#000;
+  font-family: veranda, sans-serif; 
+  font-size: 10pt;
+  margin-left:8px;
 }
 
 
@@ -82,14 +124,22 @@
   font-size:18px;
   position:relative;
   background-color:#fff;
+  padding-left: 15px;
+  font-size: 11pt;
+  font-family: veranda, sans-serif; 
+  font-variant: small-caps;
+  font-weight: bold;
 }
 
 #black_box
 {
   margin: 0 auto;
-  height: 100px;
+  height: 80px;
   width: 580px;
   background-color:#000;
+  color:#66FF00;
+  vertical-align:middle;
+  
 }
 
 #profile {
@@ -103,4 +153,5 @@
   background: #98F5FF;
   color: black;
 }
+
 
