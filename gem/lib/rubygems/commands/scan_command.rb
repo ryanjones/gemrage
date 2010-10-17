@@ -42,18 +42,19 @@ class Gem::Commands::ScanCommand < Gem::Command
     if dir = get_one_optional_argument
       notify(send_project_to_gemrage(project_scan(File.expand_path(dir))))
     else
-      notify(send_system_to_gemrage(system_scan))
+      # notify(send_system_to_gemrage(system_scan))
+      notify(send_system_to_gemrage(basic_scan))
     end
   end
 
 private
 
   def send_system_to_gemrage(gems)
-    RestClient.post(URI.join(GemrageHost, '/api/v1/payload/system.json').to_s, :payload => { :header => { :machine_id => mac_hash }, :installed_gems => gems })
+    JSON.parse(RestClient.post(URI.join(GemrageHost, '/api/v1/payload/system.json').to_s, :payload => { :header => { :machine_id => mac_hash }, :installed_gems => gems }))['location']
   end
 
   def send_project_to_gemrage(payload)
-    payload.to_json
+    JSON.parse(RestClient.post(URI.join(GemrageHost, '/api/v1/payload/system.json').to_s, :payload => { :header => { :machine_id => mac_hash }, :projects => payload }))['location']
   end
 
   def project_scan(dir)
