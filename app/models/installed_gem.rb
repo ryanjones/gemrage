@@ -5,6 +5,13 @@ class InstalledGem < ActiveRecord::Base
   belongs_to :rubygem
   belongs_to :platform
 
+  scope :ranked, select('rubygems.name, rubygem_id,
+    COUNT(distinct machine_id) as machine_count,
+    COUNT(distinct platform_id) as platform_count,
+    GROUP_CONCAT(version_list) as version_list').
+    joins(:rubygem).group(:rubygem_id).
+    order('machine_count DESC, platform_count DESC, rubygems.name')
+
   # Process installed_gems payload from gem scanner
   # { name => { platform => version_list, ... }, ... }
   def self.process(machine, payload)
