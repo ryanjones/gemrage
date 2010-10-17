@@ -1,2 +1,10 @@
 #project
-  PROJECT BITCH!
+  %h1&= @project.name
+  %hr
+  %table.color{ :cellspacing => 0 }
+    %tr
+      %th Gem
+      %th Info
+      %th Version
+      %th Latest Version
+    %tr= render(:partial => 'project_gem', :collection => @project.gems.includes(:rubygem))
