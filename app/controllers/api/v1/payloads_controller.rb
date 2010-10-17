@@ -8,7 +8,7 @@ class Api::V1::PayloadsController < ApplicationController
         begin
           render(:json => { :location => payload_url(Payload.create_from_params(params)) })
         rescue
-          render(:json => { :error => 'An error has occurred' }, :status => 500)
+          render(:json => { :error => 'An error has occurred' }, :status => 400)
         end
       end
     end

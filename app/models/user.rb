@@ -12,7 +12,9 @@ class User < ActiveRecord::Base
   
   has_many :machines
   has_many :installed_gems
-
+  has_many :projects
+  has_many :project_gems, :through => :projects
+  
   validates_presence_of :handle
   validates_uniqueness_of :handle
 
