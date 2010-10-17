@@ -8,15 +8,20 @@ class InstalledGem < ActiveRecord::Base
   # Process installed_gems payload from gem scanner
   # { name => { platform => version_list, ... }, ... }
   def self.process(machine, payload)
-    # TODO: create/update/delete
-    payload.map do |name, platform_data|
-      process_gem(name, platform_data).each do |attributes|
-        # Throw exception so we can catch it if something fails
-        create!(attributes.merge(
-          {:user_id => machine.user_id, :machine_id => machine.id})
-        )
-      end
+    rows = payload.map do |name, platform_data|
+      process_gem(name, platform_data)
+    end.flatten
+    
+    # delete all
+    purge!(machine)
+    
+    # create
+    rows.each do |attributes|
+      create!(attributes.merge!(
+        {:user_id => machine.user_id, :machine_id => machine.id}
+      ))
     end
+    
   end
 
 private
@@ -37,5 +42,10 @@ private
       { :platform_id => Platform.id_for_code(platform), :version_list => versions }
     end
   end
-
+ 
+  def self.purge!(machine)
+    InstalledGem.delete_all(:user_id => machine.user_id,
+                            :machine_id => machine.id)
+  end
+  
 end
