@@ -1,4 +1,5 @@
 #profile
+  = gravatar(current_user)
   %h1#handle&= current_user.handle
   - if @payload
     %br
