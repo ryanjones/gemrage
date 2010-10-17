@@ -1,10 +1,10 @@
 #project
   %h1&= @project.name
-  %hr
-  %table.color{ :cellspacing => 0 }
-    %tr
+
+  %table#gems
+    %tr.header
       %th Gem
-      %th Info
-      %th Version
       %th Latest Version
     %tr= render(:partial => 'project_gem', :collection => @project.gems.includes(:rubygem))
+    
+%a.back{:href => user_profile_path()} &larr; Back
