@@ -11,7 +11,9 @@ class Project < ActiveRecord::Base
       if data['gems'].present?
         # only set the name on create (user can edit)
         project = find_by_identifier(identifier) || 
-                  create(:name => data['name'], :identifier => identifier)
+                  create(:name => data['name'], 
+                         :identifier => identifier,
+                         :origin => data['origin'])
         project.gems.process(project.user, data['gems'])
       end
     end
