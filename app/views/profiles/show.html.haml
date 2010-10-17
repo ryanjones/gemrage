@@ -2,8 +2,9 @@
   = gravatar(current_user)
   %h1#handle&= link_to(current_user.handle, user_profile_path(current_user.handle))
   - if @payload
-    %br
-    = button_to('Import', { :controller => 'payloads', :action => 'update', :id => @payload.uid }, :method => :put)
+    #import
+      %p You have a pending gemrage payload to import. To make it yours, just claim it. 
+      = button_to('Claim', { :controller => 'payloads', :action => 'update', :id => @payload.uid }, :method => :put)
   %ul
     %li= link_to('Installed Gems', user_gems_path(current_user.handle))
   %ul
