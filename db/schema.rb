@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101017032202) do
+ActiveRecord::Schema.define(:version => 20101017191103) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(:version => 20101017032202) do
 
   create_table "payloads", :force => true do |t|
     t.string   "uid"
-    t.string   "machine_id"
     t.text     "payload"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -73,6 +72,32 @@ ActiveRecord::Schema.define(:version => 20101017032202) do
   end
 
   add_index "platforms", ["code"], :name => "index_platforms_on_code", :unique => true
+
+  create_table "project_gems", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "project_id", :null => false
+    t.integer  "rubygem_id", :null => false
+    t.string   "version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "project_gems", ["project_id"], :name => "index_project_gems_on_project_id"
+  add_index "project_gems", ["rubygem_id"], :name => "index_project_gems_on_rubygem_id"
+  add_index "project_gems", ["user_id"], :name => "index_project_gems_on_user_id"
+
+  create_table "projects", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.string   "name",       :null => false
+    t.string   "identifier", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "origin"
+  end
+
+  add_index "projects", ["identifier"], :name => "index_projects_on_identifier"
+  add_index "projects", ["origin", "user_id"], :name => "projects_origin_user"
+  add_index "projects", ["user_id"], :name => "index_projects_on_user_id"
 
   create_table "rubygems", :force => true do |t|
     t.string   "name",                              :null => false
