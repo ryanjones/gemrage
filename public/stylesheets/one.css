@@ -146,7 +146,7 @@ img {
 }
 
 table.color tr:nth-child(2n) {
-  background: #98F5FF;
+  background: #CCC;
   color: black;
 }
 
@@ -160,9 +160,63 @@ table.color tr:nth-child(2n) {
   width: 100%;
 }
 
-#public_gems table td {
-  padding: 5px;
+a {
+	color: #900;
+	text-decoration: none;
 }
+
+a:hover {
+	text-decoration:underline;
+}
+
+/* @group Gems */
+
+table#gems tr {
+   margin: 0 0 2px;
+
+}
+
+table#gems th {
+	text-align: left;
+}
+
+table#gems th.numeric, table#gems td.numeric {
+	text-align: right;
+}
+
+table#gems td {
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 0;
+	border: none;
+}
+
+table#gems tr {
+	background: #CCC;
+}
+
+table#gems tr:nth-child(2n) {
+  background: #eee;
+  color: black;
+}
+
+.gem .name {
+	font-size: 18px;
+}
+
+.gem .version {
+	font-size: 14px;
+	vertical-align: top;
+}
+
+#gems .info {
+	text-size: 8px;
+	color: #666;
+}
+
+/* @end */
+
+
 
 table .gem_name {
   font-size: 125%;

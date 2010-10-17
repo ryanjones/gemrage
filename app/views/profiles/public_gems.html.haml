@@ -1,11 +1,7 @@
-#public_gems
-  %table.color{ :cellspacing => 0 }
-    %tr
-      %th Gem
-      %th Info
-      %th Machines
-      %th Platforms
-      %th Version
-      %th Latest Version
-    - @gems.each do |rg|
-      = render(:partial => 'profiles/installed_gem', :locals => {:rg => rg})
+%table#gems
+  %tr
+    %th Gem
+    %th.numeric Machines
+    %th.numeric Platforms
+  - @gems.each do |rg|
+    = render(:partial => 'profiles/installed_gem', :locals => {:rg => rg})
