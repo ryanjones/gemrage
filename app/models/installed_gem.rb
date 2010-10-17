@@ -8,6 +8,7 @@ class InstalledGem < ActiveRecord::Base
   # Process installed_gems payload from gem scanner
   # { name => { platform => version_list, ... }, ... }
   def self.process(machine, payload)
+    # TODO: create/update/delete
     payload.map do |name, platform_data|
       process_gem(name, platform_data).each do |attributes|
         create(attributes.merge(
@@ -34,10 +35,6 @@ private
     data.map do |platform, versions|
       { :platform_id => Platform.id_for_code(platform), :version_list => versions }
     end
-  end
-  
-  def self.purge
-
   end
   
 end
