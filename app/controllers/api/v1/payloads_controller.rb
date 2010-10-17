@@ -6,7 +6,9 @@ class Api::V1::PayloadsController < ApplicationController
     respond_to do |format|
       format.json do
         begin
-          render(:json => { :location => payload_url(Payload.create_from_params(params)) })
+          payload = Payload.create_from_params(params)
+          debugger
+          render(:json => { :location => payload_url(payload) })
         rescue
           render(:json => { :error => 'An error has occurred' }, :status => 500)
         end
