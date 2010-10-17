@@ -208,6 +208,7 @@ DEPENDENCIES
   mysql
   omniauth
   rails (= 3.0.1)
+  rest-client (~> 1.6.1)
   rspec
   rspec-rails
   ruby-debug

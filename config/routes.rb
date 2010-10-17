@@ -6,6 +6,10 @@ Gemrage::Application.routes.draw do
     :as => 'auth_callback'
 
   devise_for :users, :controllers => { :registrations => 'registrations' }
+  devise_scope :user do
+    get "/login" => "devise/sessions#new"
+    get "/logout" => "devise/sessions#destroy"
+  end
 
   resources :authentications
 
@@ -31,5 +35,5 @@ Gemrage::Application.routes.draw do
   get '/:handle/gems' => 'profiles#public_gems', :as => :user_gems
   get '/:handle/:slug' => 'projects#show', :as => :user_project
 
-  root :to => "home#index"
+  root :to => "pages#home"
 end
