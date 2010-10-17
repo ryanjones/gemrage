@@ -8,9 +8,12 @@ paths = ENV['GEM_PATH'].to_s.split(':')
 paths.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', '..', '..', 'vendor', 'ruby', '1.8')))
 ENV['GEM_PATH'] = paths.join(':')
 ENV['BUNDLE_GEMFILE'] = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', '..', 'Gemfile'))
+
 require 'bundler'
-Bundler.setup
-Bundler.require
+require 'uri'
+require 'rvm'
+require 'rest-client'
+require 'json'
 
 class Gem::Commands::ScanCommand < Gem::Command
   include Gem::GemcutterUtilities
