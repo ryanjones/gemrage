@@ -22,5 +22,7 @@ Gemrage::Application.routes.draw do
 
   resources :payloads
 
+  match ':id' => 'profiles#show', :as => :profiles, :via => :get
+
   root :to => "home#index"
 end
