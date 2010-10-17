@@ -61,6 +61,5 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     :log_level => 'info',
     :log_file => "#{configuration[:deploy_to]}/shared/log/god.log"
   })
-  plugin :god
   recipe :god
 end
