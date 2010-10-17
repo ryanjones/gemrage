@@ -2,5 +2,12 @@
   %h1&= @rubygem.name
   = link_to('Rubygems.org Page', "https://rubygems.org/gems/#{@rubygem.name}")
   %hr
+  %h3 It does what now?
+  &= @rubygem.info
+  %h3 How many times?
+  &= "#{@rubygem.downloads} Downloads"
+  %h3 Latest Version
+  &= @rubygem.latest_version
+  %h3 Graph time!
   #stats
     Stats go here!
