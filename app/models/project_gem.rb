@@ -19,9 +19,9 @@ class ProjectGem < ActiveRecord::Base
       # find by user, gem, project
       pg = where(g.reject {|k,v| k == :version}).first
       if pg.present?
-        pg.update_attributes(:version => g[:version]) # update version
+        pg.update_attributes!(:version => g[:version]) # update version
       else
-        create(g)
+        create!(g)
       end
       gem_ids << g[:rubygem_id]
     end
