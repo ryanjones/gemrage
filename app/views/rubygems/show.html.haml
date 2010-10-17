@@ -8,6 +8,7 @@
   &= "#{@rubygem.downloads} Downloads"
   %h3 Latest Version
   &= @rubygem.latest_version
-  %h3 Graph time!
   #stats
-    Stats go here!
+    - gem_stats(@rubygem).each do |s,v|
+      %h1&= s
+      = v
