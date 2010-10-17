@@ -16,7 +16,6 @@ img {
   margin: 0 auto;
   width: 750px;
   background:#000;
-  min-height: 550px;
 }
 
 #header
@@ -154,7 +153,6 @@ table.color tr:nth-child(2n) {
   background: white;
   color: black;
   padding: 15px;
-  min-height: 500px;
 }
 
 #public_gems table {
@@ -208,3 +206,19 @@ table .gem_version {
   -webkit-box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.75);
 }
+
+#stats {
+  border: 2px solid black;
+  width: 100%;
+  margin: 25px auto;
+}
+
+.flash {
+  padding:15px;
+  margin: 0 auto;
+  width: 700px;
+  position: absolute;
+  z-index: 999;
+  text-align: right;
+}
+
