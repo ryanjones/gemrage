@@ -29,6 +29,7 @@ Gemrage::Application.routes.draw do
 
   authenticate :user do
     get '/dashboard' => 'profiles#show', :as => :profile
+    resources :projects, :only => [:edit, :update, :destroy]
   end
 
   get '/:handle' => 'profiles#public_profile', :as => :user_profile
