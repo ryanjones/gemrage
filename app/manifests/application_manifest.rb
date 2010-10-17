@@ -62,4 +62,5 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     :log_file => "#{configuration[:deploy_to]}/shared/log/god.log"
   })
   recipe :god
+  recipe :memcached
 end
