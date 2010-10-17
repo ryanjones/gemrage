@@ -1,10 +1,11 @@
 #container
 {
-  padding-top:25px;
+  padding:15px;
   margin: 0 auto;
   width: 750px;
   background:#000;
-  height: 600px;
+  min-height: 600px;
+  color: white;
 }
 
 #header
@@ -73,7 +74,7 @@
   display:-moz-inline-stack;
   display:inline-block;
   zoom:1;
-  *display:inline;  
+  *display:inline;
 }
 
 .os li {
@@ -90,3 +91,16 @@
   width: 580px;
   background-color:#000;
 }
+
+#profile {
+  color: black;
+  padding: 15px;
+  background: white;
+  min-height: 500px;
+}
+
+#profile tr:nth-child(2n) {
+  background: #98F5FF;
+  color: black;
+}
+

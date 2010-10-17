@@ -9,7 +9,8 @@ Spec::Runner.configure do |config|
   @valid_user_attr = { 
     :email => 'support@gemrage.com',
     :password => 'password',
-    :password_confirmation => 'password'
+    :password_confirmation => 'password',
+    :handle => 'support'
   }
   
   

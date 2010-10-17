@@ -11,12 +11,22 @@ class Payload < ActiveRecord::Base
   class << self
     def create_from_params(params)
       pay = params[:payload]
-      create(:machine_id => pay[:header][:machine_id], :payload => pay[:installed_gems].to_json)
+      create(:machine_id => pay[:header][:machine_id], :payload => (pay[:installed_gems] || pay[:projects]).to_json)
     end
   end
 
   def to_param
     uid
+  end
+
+  def self.process(user, payload_uid)
+    payload = find_by_uid(payload_uid)
+
+    Payload.transaction do
+      machine = user.machines.find_or_create_by_identifier(payload.machine_id)
+      InstalledGem.process(machine, JSON.parse(payload.payload))
+      # ProjectGem.process
+    end
   end
 
 private

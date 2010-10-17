@@ -23,7 +23,12 @@ describe PayloadsController do
 
         it "should redirect to the profile page" do
           do_get
-          response.should redirect_to(profiles_url("bawls", :payload => 42))
+          response.should redirect_to(profile_url)
+        end
+
+        it "should set payload id in session" do
+          do_get
+          session[:payload].should == 42
         end
       end
 
