@@ -1,0 +1,11 @@
+#profile.rounded-corners
+  %h1#handle&= current_user.handle
+  %br/
+  - if @payload
+    = button_to "Import", {:controller => "payloads", :action => "update", :id => @payload.uid }, :method => :put 
+  %table{:border => 0, :cellspacing => 5, :cellpadding => 5}
+    %tr
+      %th Gem
+      %th Version
+    = render(:partial => 'installed_gem', :collection => current_user.installed_gems.includes(:rubygem).order('rubygems.name'), :as => :rg)
+
