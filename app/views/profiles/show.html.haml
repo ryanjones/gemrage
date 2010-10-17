@@ -7,7 +7,4 @@
       = button_to('Claim', { :controller => 'payloads', :action => 'update', :id => @payload.uid }, :method => :put)
   %ul
     %li= link_to('Installed Gems', user_gems_path(current_user.handle))
-  %ul
-    %li change user password
-    %li change project names
-    %li change your career
+    %li= link_to('My Projects', user_profile_path(current_user.handle))
