@@ -17,13 +17,12 @@
 #header h1 { margin: 0; }
 
 #nav { float:right; }
+
 #content
 {
   clear: left;
   padding: 20px;
 }
-
-
 
 #footer
 {
@@ -105,7 +104,6 @@
   margin-left:8px;
 }
 
-
 .rounded-corners {
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
@@ -173,4 +171,31 @@ table .gem_version {
 
 #profile .gravatar {
   float: right;
+}
+
+.login-form fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.login-form fieldset ol li {
+  list-style-type: none;
+}
+
+.login-form label {
+  display: block;
+}
+
+.login-form label[for="user_remember_me"] {
+  display: inline;
+}
+
+#alt-auth li {
+  list-style-type: none;
+  display: inline-block;
+  text-align: center;
+}
+#alt-auth img {
+  display: block;
 }
