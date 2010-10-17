@@ -13,4 +13,8 @@ class PayloadsController < ApplicationController
       render :status => 400
     end
   end
+
+  def update
+    
+  end
 end
