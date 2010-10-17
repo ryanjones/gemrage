@@ -7,7 +7,8 @@ class PayloadsController < ApplicationController
     if results.empty?
       render :nopayload, :status => 404
     elsif results.size == 1
-      redirect_to profiles_url(current_user.handle, :payload => params[:id])
+      session[:payload] = params[:id]
+      redirect_to profile_url
     else
       render :status => 400
     end
