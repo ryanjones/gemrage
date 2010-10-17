@@ -1,3 +1,7 @@
+html, body, * {
+  font-family: 'Cantarell', 'Helvetica', 'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, sans-serif;
+}
+
 #container
 {
   padding:15px;
@@ -39,7 +43,6 @@
   margin: 0 auto;
   margin-top:10px;
   width: 600px;
-  height:250px;
   background-color:#FFF;
   padding: 5px;
 }
@@ -47,7 +50,6 @@
 #quickstart h1
 {
   color:#000;
-  font-family: veranda, sans-serif; 
   font-variant: small-caps;
   font-size: 11pt;
   margin-left:8px;
@@ -56,18 +58,15 @@
 #quickstart p
 {
   color:#000;
-  font-family: veranda, sans-serif; 
   font-size: 10pt;
   margin-left:8px;
 }
 
 #os_pos
 {
-  margin: 0 auto;
+  margin: 20px auto;
   width: 600px;
   background-color:#fff;
-  margin-top:20px;
-  margin-bottom:20px;
 }
 
 #information
@@ -83,7 +82,6 @@
 #information h1
 {
   color:#000;
-  font-family: veranda, sans-serif; 
   font-variant: small-caps;
   font-size: 12pt;
   margin-left:8px;
@@ -93,7 +91,6 @@
 #information p
 {
   color:#000;
-  font-family: veranda, sans-serif; 
   font-size: 10pt;
   margin-left:8px;
 }
@@ -101,11 +98,9 @@
 #information li
 {
   color:#000;
-  font-family: veranda, sans-serif; 
   font-size: 10pt;
   margin-left:8px;
 }
-
 
 .rounded-corners {
   -moz-border-radius: 20px;
@@ -128,7 +123,6 @@
   background-color:#fff;
   padding-left: 15px;
   font-size: 11pt;
-  font-family: veranda, sans-serif; 
   font-variant: small-caps;
   font-weight: bold;
   align:middle;
@@ -137,11 +131,11 @@
 #black_box
 {
   margin: 0 auto;
-  height: 52px;
   width: 580px;
   background-color:#000;
   color:#66FF00;
   vertical-align:middle;
+  padding-top: 5px;
 }
 
 #plug
@@ -150,7 +144,6 @@
   margin: 0 auto;
   background-color:#000;
   vertical-align:middle;
-  font-family: veranda, sans-serif; 
   font-variant: small-caps;
   font-weight: bold;
   text-align:center;
@@ -186,4 +179,9 @@ table .gem_version {
 
 #profile .gravatar {
   float: right;
+}
+
+.box-shadow {
+  -webkit-box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.75);
 }
