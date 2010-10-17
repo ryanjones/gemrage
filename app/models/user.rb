@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :installed_gems
 
   validates_presence_of :handle
-  validates_uniquenes_of :handle
+  validates_uniqueness_of :handle
 
   def apply_omniauth(omniauth)
     self.email = omniauth['user_info']['email'] if email.blank?
