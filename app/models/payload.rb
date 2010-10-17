@@ -11,7 +11,7 @@ class Payload < ActiveRecord::Base
   class << self
     def create_from_params(params)
       pay = params[:payload]
-      create(:machine_id => pay[:header][:machine_id], :payload => pay[:installed_gems].to_json)
+      create(:machine_id => pay[:header][:machine_id], :payload => (pay[:installed_gems] || pay[:projects]).to_json)
     end
   end
 
