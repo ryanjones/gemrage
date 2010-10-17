@@ -1,8 +1,10 @@
 #public_gems
   %table.color{ :cellspacing => 0 }
     %tr
-      %td
-        %h1 Gem
-      %td
-        %h1 Version
-    = render(:partial => 'profiles/installed_gem', :collection => @user.installed_gems.includes(:rubygem).order('rubygems.name'), :as => :rg)
+      %th Gem
+      %th Info
+      %th Machines
+      %th Platforms
+      %th Version
+    - @gems.each do |rg|
+      = render(:partial => 'profiles/installed_gem', :locals => {:rg => rg})
