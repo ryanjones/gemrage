@@ -223,3 +223,6 @@ table .gem_version {
   text-align: right;
 }
 
+#project table {
+  width: 100%;
+}
