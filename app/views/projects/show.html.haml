@@ -1,6 +1,11 @@
 #project
   %h1&= @project.name
 
+  - if user_signed_in? && @project.user == current_user
+    = link_to('edit', edit_project_path(@project))
+    |
+    = link_to('destroy', project_path(@project), :method => :delete, :confirm => 'Really delete this project?')
+  
   %table#gems
     %tr.header
       %th Gem
