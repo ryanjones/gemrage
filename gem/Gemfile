@@ -4,6 +4,7 @@ gem 'rest-client', '~> 1.6.1'
 gem 'bundler', '~> 1.0.3'
 gem 'macaddr', '~> 1.0.0'
 gem 'rvm', '~> 1.0.14'
+gem 'json_pure', '~> 1.4.6', :require => 'json'
 
 group :development do
   gem 'rspec', '~> 2.0.0'

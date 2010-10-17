@@ -6,6 +6,10 @@
   <p><%= f.label :email %><br />
   <%= f.text_field :email %></p>
 
+  <p><%= f.label :handle %><br />
+  <%= f.text_field :handle %></p>
+
+<% if @user.password_required? %>
   <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
   <%= f.password_field :password %></p>
 
@@ -14,6 +18,7 @@
 
   <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></p>
+<% end %>
 
   <p><%= f.submit "Update" %></p>
 <% end %>
