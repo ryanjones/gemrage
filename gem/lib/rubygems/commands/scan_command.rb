@@ -48,9 +48,9 @@ class Gem::Commands::ScanCommand < Gem::Command
 
   def execute
     if dir = get_one_optional_argument
-      notify(send_project_to_gemrage(project_scan(File.expand_path(dir))))
+      send_project_to_gemrage(project_scan(File.expand_path(dir)))
     else
-      notify(send_system_to_gemrage(system_scan))
+      send_system_to_gemrage(system_scan)
     end
   end
 
