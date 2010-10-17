@@ -21,6 +21,7 @@ Gemrage::Application.routes.draw do
   end
 
   resources :payloads
+  resources :rubygems, :only => :show
 
   authenticate :user do
     resource :profile

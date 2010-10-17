@@ -1,9 +1,9 @@
-#profile.rounded-corners
+#profile.rounded-corners.inner
   %h1#handle&= current_user.handle
   %br/
   - if @payload
-    = button_to "Import", {:controller => "payloads", :action => "update", :id => @payload.uid }, :method => :put 
-  %table{:border => 0, :cellspacing => 5, :cellpadding => 5}
+    = button_to('Import', { :controller => 'payloads', :action => 'update', :id => @payload.uid }, :method => :put)
+  %table{ :border => 0, :cellspacing => 5, :cellpadding => 5 }
     %tr
       %th Gem
       %th Version
