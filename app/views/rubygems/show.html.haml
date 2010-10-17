@@ -13,4 +13,4 @@
     %tr{ :align => 'center' }
       %td&= @rubygem.latest_version
       - gs.keys.each do |k|
-        %td&= gs[k]
+        %td&= number_with_delimiter(gs[k])
