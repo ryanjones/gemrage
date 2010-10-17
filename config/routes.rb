@@ -32,6 +32,7 @@ Gemrage::Application.routes.draw do
     resources :projects, :only => [:edit, :update, :destroy]
   end
 
+  get '/stats' => 'pages#stats', :as => :stats
   get '/:handle' => 'profiles#public_profile', :as => :user_profile
   get '/:handle/gems' => 'profiles#public_gems', :as => :user_gems
   get '/:handle/:slug' => 'projects#show', :as => :user_project

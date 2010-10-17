@@ -11,6 +11,7 @@ class Rubygem < ActiveRecord::Base
   validates_uniqueness_of :name, :case_sensitive => true
 
   has_many :installed_gems
+  has_many :project_gems
 
   after_create :update_from_rubygems
 

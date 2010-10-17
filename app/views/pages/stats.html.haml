@@ -1,0 +1,38 @@
+#stats_page
+  %h1 Numbers and other things
+  %hr
+  %h3 Basics
+  - s, v = basic_stats
+  %table.tcenter{ :cellspacing => 0 }
+    %tr
+      - s.each do |th|
+        %th&= th
+    %tr
+      - v.each do |td|
+        %td&= number_with_delimiter(td)
+  %h3 Installed gems per platform
+  - groups = Platform.all.partition { |p| p.id.odd? }
+  - groups.each do |platforms|
+    %table.tcenter{ :cellspacing => 0 }
+      %tr
+        - platforms.each do |p|
+          %th&= p.name
+      %tr
+        - platforms.each do |p|
+          %td&= number_with_delimiter(cached_platform_ig_count(p))
+  %h3 Top 25 Installed Gems
+  %table.color{ :cellspacing => 0 }
+    %tr
+      %th Gem
+      %th Info
+      %th Latest Version
+      %th Installs
+    %tr= render(:partial => 'rubygem', :collection => top_25_installed_gems)
+  %h3 Top 25 Project Gems
+  %table.color{ :cellspacing => 0 }
+    %tr
+      %th Gem
+      %th Info
+      %th Latest Version
+      %th Installs
+    %tr= render(:partial => 'rubygem', :collection => top_25_project_gems)
