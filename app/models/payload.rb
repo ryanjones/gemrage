@@ -18,6 +18,16 @@ class Payload < ActiveRecord::Base
   def to_param
     uid
   end
+  
+  def process(user, payload_uid)
+    payload = find_by_uid(payload_uid)
+    
+    Payload.transaction do
+      machine = user.machines.find_or_create_by_identifier(payload.machine_id)
+      InstalledGem.process(machine, payload.payload)
+      # ProjectGem.process
+    end
+  end
 
 private
 
