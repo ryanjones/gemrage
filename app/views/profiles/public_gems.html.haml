@@ -1,6 +1,8 @@
 #public_gems.inner.rounded-corners
   %table.color{ :cellspacing => 0 }
     %tr
-      %td Gem
-      %td Version
+      %td
+        %h1 Gem
+      %td
+        %h1 Version
     = render(:partial => 'profiles/installed_gem', :collection => @user.installed_gems.includes(:rubygem).order('rubygems.name'), :as => :rg)
