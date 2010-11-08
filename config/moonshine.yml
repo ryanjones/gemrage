@@ -20,7 +20,7 @@
 # Directory where application is deployed to
 :deploy_to: /srv/gemrage
 
-# Primary domain application will be accessed as 
+# Primary domain application will be accessed as
 :domain: gemrage.com
 
 # Domain aliases for application. One common use of this is for asset hosts.
@@ -43,6 +43,7 @@
 # directory to the server: these are files that you don't have/want in scm.
 :shared_config:
   - config/database.yml
+  - config/gemrage.yml
 
 # The entries in shared_children are created in #{application}/shared
 :shared_children:
@@ -62,13 +63,13 @@
 
 # Passenger-specific options. Refer to the following templates for details
 # about what values are used:
-# - vendor/plugins/moonshine/lib/moonshine/manifest/rails/templates/passenger.conf.erb 
-# - vendor/plugins/moonshine/lib/moonshine/manifest/rails/templates/passenger.vhost.erb 
+# - vendor/plugins/moonshine/lib/moonshine/manifest/rails/templates/passenger.conf.erb
+# - vendor/plugins/moonshine/lib/moonshine/manifest/rails/templates/passenger.vhost.erb
 :passenger:
   :max_pool_size: 3
 
 # MySQL-specific options. Refer to the following templates for details about
 # what values are used:
-# - vendor/plugins/moonshine/lib/moonshine/manifest/rails/templates/moonshine.cnf.erb 
+# - vendor/plugins/moonshine/lib/moonshine/manifest/rails/templates/moonshine.cnf.erb
 :mysql:
   :innodb_buffer_pool_size: 128M

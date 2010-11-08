@@ -1,0 +1,4 @@
+:twitter:
+  :access: twitter-access
+  :secret: twitter-secret
+:secret_token: secret-token

@@ -7,6 +7,7 @@ tmp/**/*
 .rvmrc
 *.tmproj
 config/database.yml
+config/gemrage.yml
 bin/*
 vendor/plugins/bootstrap/id_dsa*
 vendor/plugins/bootstrap/keys
