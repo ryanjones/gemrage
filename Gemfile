@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.1'
+gem 'rails', '~> 3.0.1'
 
 gem 'haml'
 
 # db backend driver
-gem 'mysql'
+gem 'mysql2'
 
 # authentication
 gem 'devise'
@@ -32,6 +32,7 @@ group :production do
 end
 
 group :test, :development do
+  gem 'ruby-debug'
   # workstation side remote admin/deploy
   gem 'capistrano'
 
