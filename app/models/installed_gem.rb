@@ -19,17 +19,17 @@ class InstalledGem < ActiveRecord::Base
     rows = payload.map do |name, platform_data|
       process_gem(name, platform_data)
     end.flatten
-    
+
     # delete all
     purge!(machine)
-    
+
     # create
     rows.each do |attributes|
       create!(attributes.merge!(
         {:user_id => machine.user_id, :machine_id => machine.id}
       ))
     end
-    
+
   end
 
 private
@@ -50,10 +50,10 @@ private
       { :platform_id => Platform.id_for_code(platform), :version_list => versions }
     end
   end
- 
+
   def self.purge!(machine)
     InstalledGem.delete_all(:user_id => machine.user_id,
                             :machine_id => machine.id)
   end
-  
+
 end
