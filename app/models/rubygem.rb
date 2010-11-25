@@ -35,6 +35,8 @@ class Rubygem < ActiveRecord::Base
       :info => json['info'],
       :downloads => json['downloads']
     })
+    # Update this a week from now
+    self.delay(:run_at => 1.week.from_now).update_from_rubygems!
   rescue RestClient::ResourceNotFound => not_found
     # This gem doesn't exist on rubygems. Don't worry about it
   end
