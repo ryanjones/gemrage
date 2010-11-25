@@ -5,11 +5,11 @@
     = link_to('edit', edit_project_path(@project))
     |
     = link_to('destroy', project_path(@project), :method => :delete, :confirm => 'Really delete this project?')
-  
+
   %table#gems
     %tr.header
       %th Gem
       %th Latest Version
-    %tr= render(:partial => 'project_gem', :collection => @project.gems.includes(:rubygem))
-    
+    %tr= render(:partial => 'project_gem', :collection => @project.gems.includes(:rubygem).joins(:rubygem).order('rubygems.name'))
+
 %a.back{:href => user_profile_path()} &larr; Back
