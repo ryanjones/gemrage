@@ -3,5 +3,4 @@
     %th Gem
     %th.numeric Machines
     %th.numeric Platforms
-  - @gems.each do |rg|
-    = render(:partial => 'profiles/installed_gem', :locals => {:rg => rg})
+  = render(:partial => 'profiles/installed_gem', :collection => @gems, :as => :rg)
