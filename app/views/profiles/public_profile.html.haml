@@ -3,4 +3,4 @@
   %h1&= @user.handle
   %hr
   %h2 Projects
-  %ul= render(:partial => 'project', :collection => @user.projects.order(:name))
+  %ul= render(:partial => 'project', :collection => @user.projects.order(:name).includes(:user))

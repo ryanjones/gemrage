@@ -10,7 +10,8 @@ class InstalledGem < ActiveRecord::Base
     COUNT(distinct platform_id) as platform_count,
     GROUP_CONCAT(version_list) as version_list').
     joins(:rubygem).group(:rubygem_id).
-    order('machine_count DESC, platform_count DESC, rubygems.name')
+    order('machine_count DESC, platform_count DESC, rubygems.name').
+    includes(:rubygem)
 
   # Process installed_gems payload from gem scanner
   # { name => { platform => version_list, ... }, ... }
