@@ -10,7 +10,7 @@ rails_root = "/srv/gemrage/current"
     w.stop_timeout = 10.seconds
     w.pid_file = File.join(rails_root, 'tmp', 'pids', "delayed_job.#{num}.pid")
     w.start = "/bin/su -c 'RAILS_ENV=#{ENV['RAILS_ENV']} /usr/bin/ruby #{rails_root}/script/delayed_job start -i #{num}' - rails"
-    w.stop = "/bin/su -c 'RAILS_ENV=#{ENV['RAILS_ENV']} su/usr/bin/ruby #{rails_root}/script/delayed_job stop -i #{num}' - rails"
+    w.stop = "/bin/su -c 'RAILS_ENV=#{ENV['RAILS_ENV']} /usr/bin/ruby #{rails_root}/script/delayed_job stop -i #{num}' - rails"
 
     # retart if memory gets too high
     w.transition(:up, :restart) do |on|
